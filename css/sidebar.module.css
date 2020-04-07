@@ -1,0 +1,39 @@
+/*https://github.com/jsmanifest/modern-sidebar*/
+
+.sidebar {
+    max-width: 240px;
+    height: 100vh;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  
+  .sidebarItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .sidebarItemContent {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .sidebarItemIcon {
+    margin-right: 6px;
+  }
+  
+  .sidebarItemText{
+    width: 100%;
+  }
+  
+  .sidebarItemExpandArrow {
+    font-size: 1.2rem !important;
+  }
+  
+  .sidebarItemExpandArrowExpanded {
+    color: #09bb12;
+    font-weight: bold;
+  }
