@@ -33,7 +33,7 @@ function SidebarItem({ depthStep = 10, depth = 0, expanded, item, ...rest }) {
     expandIcon = !collapsed ? (
       <ExpandLessIcon
         className={
-          sbstyle.sidebarItemExpandArrow + sbstyle.sidebarItemExpandArrowExpanded
+          sbstyle.sidebarItemExpandArrow + " " + sbstyle.sidebarItemExpandArrowExpanded
         }
       />
     ) : (
@@ -88,9 +88,9 @@ function Sidebar({ items, depthStep, depth, expanded }) {
       <List disablePadding dense>
         {items.map((sidebarItem, index) => (
           <React.Fragment key={`${sidebarItem.name}${index}`}>
-            {sidebarItem === "divider" ? (
-              <Divider style={{ margin: "6px 0" }} />
-            ) : (
+            {sidebarItem === "divider" ? 
+            (<Divider variant='middle' style={{ margin: "10px"}} />) : 
+            (
               <SidebarItem
                 depthStep={depthStep}
                 depth={depth}

@@ -5,7 +5,7 @@ import bg from '../graphics/homepage.gif'
 import bgstyle from '../css/background.module.css'
 
 import Sidebar from '../components/sidebar'
-import items from '../components/items'
+import items from '../components/sbitems'
 
 class Index extends Component
 {
@@ -19,7 +19,6 @@ class Index extends Component
         return(
           <div className={bgstyle.container}>
             <Sidebar items={items}/>
-            <img src={bg} className={bgstyle.styling}></img>
           </div>
         )
     }

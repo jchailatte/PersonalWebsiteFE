@@ -1,10 +1,8 @@
 .container{
-    display: flex;
-    flex-direction: row;
+    background-image: url('../graphics/homepage.gif');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: right;
+    background-size: auto 100vh;
 }
 
-.styling{
-    display: flex;
-    height: 100vh;
-    justify-content: flex-end;
-}
