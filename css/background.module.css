@@ -1,4 +1,7 @@
 .container{
+    height: 100vh;
+    background-color: #f7f1e1;
+
     background-image: url('../graphics/homepage.gif');
     background-repeat: no-repeat;
     background-attachment: fixed;

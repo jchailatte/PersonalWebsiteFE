@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom'
 import bg from '../graphics/homepage.gif'
 import bgstyle from '../css/background.module.css'
 
-import Sidebar from '../components/sidebar'
+import Drawer from '../components/Drawer'
 import items from '../components/sbitems'
 
 class Index extends Component
@@ -17,8 +17,8 @@ class Index extends Component
     render()
     {
         return(
-          <div className={bgstyle.container}>
-            <Sidebar items={items}/>
+          <div className={bgstyle.container}>\
+            <Drawer></Drawer>
           </div>
         )
     }
