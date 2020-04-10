@@ -2,21 +2,22 @@ import React from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
+
+import AccountBoxIcon from '@material-ui/icons/AccountBox';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import CodeIcon from "@material-ui/icons/Code";
+import MeetingRoomIcon from "@material-ui/icons/MeetingRoomRounded";
+import ForumIcon from "@material-ui/icons/Forum";
+import GithubIcon from "@material-ui/icons/GitHub";
+import LinkedInIcon from "@material-ui/icons/LinkedIn";
 
 const drawerWidth = 240;
 
@@ -24,19 +25,8 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
   },
-  appBar: {
-    zIndex: theme.zIndex.drawer + 1,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-  },
-
   menuButton: {
     marginRight: 36,
-  },
-  hide: {
-    display: 'none',
   },
   drawer: {
     width: drawerWidth,
@@ -66,13 +56,11 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'flex-end',
     padding: theme.spacing(0, 1),
-    // necessary for content to be below app bar
-    ...theme.mixins.toolbar,
   },
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
-  },
+  }
 }));
 
 export default function MiniDrawer() {
@@ -111,21 +99,33 @@ export default function MiniDrawer() {
         </div>
         <Divider />
         <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
+          <ListItem button key={"About"}>
+            <ListItemIcon><AccountBoxIcon/></ListItemIcon>
+            <ListItemText primary={"About"}/>
+          </ListItem>
+          <ListItem button key={"Projects"}>
+            <ListItemIcon><CodeIcon/></ListItemIcon>
+            <ListItemText primary={"Projects"}/>
+          </ListItem>
+          <ListItem button key={"Rooms"}>
+            <ListItemIcon><MeetingRoomIcon/></ListItemIcon>
+            <ListItemText primary={"Rooms"}/>
+          </ListItem>
+          <ListItem button key={"Thoughts"}>
+            <ListItemIcon><ForumIcon/></ListItemIcon>
+            <ListItemText primary={"Thoughts"}/>
+          </ListItem>
         </List>
         <Divider />
         <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
+          <ListItem button component='a' href={"https://github.com/jchailatte"} key={"GitHub"}>
+            <ListItemIcon><GithubIcon/></ListItemIcon>
+            <ListItemText primary={"GitHub"}/>
+          </ListItem>
+          <ListItem button component='a' href={"https://www.linkedin.com/in/jchailatte/"} key={"LinkedIn"}>
+            <ListItemIcon><LinkedInIcon/></ListItemIcon>
+            <ListItemText primary={"LinkedIn"}/>
+          </ListItem>
         </List>
       </Drawer>
     </div>
