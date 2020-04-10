@@ -7,6 +7,9 @@ import bgstyle from '../css/background.module.css'
 import Drawer from '../components/Drawer'
 import items from '../components/sbitems'
 
+
+//todo: shift background.module.css to css in js
+
 class Index extends Component
 {
     constructor(props)
@@ -18,7 +21,7 @@ class Index extends Component
     {
         return(
           <div className={bgstyle.container}>\
-            <Drawer></Drawer>
+            <Drawer selected={'Home'}/>
           </div>
         )
     }
