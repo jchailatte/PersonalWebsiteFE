@@ -1,30 +1,34 @@
 import React, {useState, Component} from 'react'
 import ReactDOM from 'react-dom'
-
-import bg from '../graphics/homepage.gif'
-import bgstyle from '../css/background.module.css'
-
 import Drawer from '../components/Drawer'
-import items from '../components/sbitems'
+import { makeStyles, useTheme} from '@material-ui/core/styles';
 
+import bg from '../graphics/homepage.gif';
 
-//todo: shift background.module.css to css in js
-
-class Index extends Component
+const useStyles = makeStyles((theme)=>(
 {
-    constructor(props)
-    {
-        super(props);
-    }
-
-    render()
-    {
-        return(
-          <div className={bgstyle.container}>\
-            <Drawer selected={'Home'}/>
-          </div>
-        )
-    }
+    root: {
+      display:'flex',
+    },
+    container: {
+      height: '100vh',
+      backgroundColor: '#f7f1e1',
+  
+      backgroundImage: `url(${bg})`,
+      backgroundRepeat: 'no-repeat',
+      backgroundAttachment: 'fixed',
+      backgroundPosition: 'right',
+      backgroundSize: 'cover',
+    },
 }
+));
 
-export default Index;
+export default function Index(prop) {
+  const classes = useStyles();
+  
+  return(
+    <div className={classes.container}>\
+      <Drawer selected={'Home'}/>
+    </div>
+  )
+}

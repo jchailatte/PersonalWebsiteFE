@@ -11,12 +11,6 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Collapse from '@material-ui/core/Collapse';
 
-// import { ThemeProvider } from '@material-ui/styles';
-// import { createMuiTheme } from '@material-ui/core/styles';
-// import purple from '@material-ui/core/colors/purple';
-// import green from '@material-ui/core/colors/green';
-
-
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
@@ -42,6 +36,12 @@ const useStyles = makeStyles((theme) => ({
     width: drawerWidth,
     flexShrink: 0,
     whiteSpace: 'nowrap',
+  },
+  paperstyle:{
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    background: '#DBCDC6',
   },
   drawerOpen: {
     [theme.breakpoints.up('md')]:{
@@ -87,7 +87,13 @@ const useStyles = makeStyles((theme) => ({
   },
   hide: {
     opacity: 0,
-  }
+  }, 
+  iconcolor:{
+  },
+  fontstyle:{
+    fontFamily: "'Karla', sans-serif",
+    fontSize: '18px',
+  },
 }));
 
 export default function MiniDrawer(prop) {
@@ -108,8 +114,93 @@ export default function MiniDrawer(prop) {
     setOpenCollapse(!openCollapse);
   }
 
+  const sbitems =
+  [
+    {
+      text: 'Home',
+      icon: <HomeIcon/>
+    },
+    {
+      text: 'About',
+      icon: <AccountBoxIcon/>
+    },
+    {
+      text: 'Projects',
+      icon: <CodeIcon/>
+    },
+    {
+      text: 'Rooms',
+      icon: <MeetingRoomIcon/>
+    },
+    {
+      text: 'Thoughts',
+      icon: <ForumIcon/>
+    },
+    {
+      text: 'Riot',
+      icon: <HomeIcon/>,
+      nested: true,
+      children: 
+        [
+          {
+            text: 'League of Legends',
+            icon: <HomeIcon/>
+          },
+          {
+            text: 'TeamFight Tactics',
+            icon: <HomeIcon/>
+          }
+        ]
+    }
+  ];
+
+  const footer =
+  [
+    {
+      text: 'GitHub',
+      icon: <GithubIcon/>,
+      href: 'https://github.com/jchailatte'
+    },
+    {
+      text: 'LinkedIn',
+      icon: <LinkedInIcon/>,
+      href: 'https://www.linkedin.com/in/jchailatte/'
+    }
+  ];
+
+  function Itemsr({items})
+  {
+    return(
+    items.map((item,index) => (
+      <React.Fragment>
+      {!item.nested ? (
+          <ListItem button component='a' href={item.href} key={item.text} selected={prop.selected == item.text}>
+            <ListItemIcon>{item.icon}</ListItemIcon>
+            <ListItemText primary={item.text} className={classes.fontstyle} disableTypography></ListItemText>
+          </ListItem>
+        ):(
+        <>
+          <ListItem button onClick={handleOpenSetting}>
+            <ListItemIcon>{item.icon}</ListItemIcon>
+            <ListItemText primary={item.text} className={classes.fontstyle} disableTypography/>
+            {openCollapse ? <ExpandLessIcon/> : <ExpandMoreIcon/>}
+          </ListItem>
+          <Collapse in={openCollapse} timeout="auto" unmountOnExit>
+            <List disablePadding>
+              <Divider variant={'middle'}  className={{[classes.hide]: open}}/>
+              <Itemsr items={item.children}></Itemsr>
+            </List>
+          </Collapse>
+        </>
+      )}
+      </React.Fragment>
+    )));
+  }
+
   return (
     <div className={classes.root}>
+      <link href="https://fonts.googleapis.com/css2?family=La+Belle+Aurore&display=swap" rel="stylesheet"></link>
+      <link href="https://fonts.googleapis.com/css2?family=Karla&family=La+Belle+Aurore&display=swap" rel="stylesheet"></link>
       <CssBaseline />
       <Drawer
         variant="permanent"
@@ -119,68 +210,28 @@ export default function MiniDrawer(prop) {
         })}
         classes={{
           paper: clsx({
-            [classes.drawerOpen]: open,
-            [classes.drawerClose]: !open,
+            [`${classes.drawerOpen} ${classes.paperstyle}`]: open,
+            [`${classes.drawerClose} ${classes.paperstyle}`]: !open,
           }),
         }}
       >
-        <div className={classes.toolbar}>
-          <IconButton onClick={open ? handleDrawerClose : handleDrawerOpen}>
-            {!open ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-          </IconButton>
+        <div>
+          <div className={classes.toolbar}>
+            <IconButton onClick={open ? handleDrawerClose : handleDrawerOpen}>
+              {!open ? <ChevronRightIcon className={classes.iconcolor} /> : <ChevronLeftIcon className={classes.iconcolor} />}
+            </IconButton>
+          </div>
+          <Divider />
+          <List>
+            <Itemsr items={sbitems}></Itemsr>
+          </List>
         </div>
-        <Divider />
-        <List>
-          <ListItem button key={"Home"} selected={prop.selected == 'Home'}>
-            <ListItemIcon><HomeIcon/></ListItemIcon>
-            <ListItemText primary={"Home"}/>
-          </ListItem>
-          <ListItem button key={"About"} selected={prop.selected == 'About'}>
-            <ListItemIcon><AccountBoxIcon/></ListItemIcon>
-            <ListItemText primary={"About"}/>
-          </ListItem>
-          <ListItem button key={"Projects"} selected={prop.selected == "Projects"}>
-            <ListItemIcon><CodeIcon/></ListItemIcon>
-            <ListItemText primary={"Projects"}/>
-          </ListItem>
-          <ListItem button key={"Rooms"} selected={prop.selected == "Rooms"}>
-            <ListItemIcon><MeetingRoomIcon/></ListItemIcon>
-            <ListItemText primary={"Rooms"}/>
-          </ListItem>
-          <ListItem button key={"Thoughts"} selected = {prop.selected == "Thoughts"}>
-            <ListItemIcon><ForumIcon/></ListItemIcon>
-            <ListItemText primary={"Thoughts"}/>
-          </ListItem>
-          <ListItem button onClick={handleOpenSetting}>
-            <ListItemIcon><HomeIcon/></ListItemIcon>
-            <ListItemText primary="Riot" />
-              {openCollapse ? <ExpandLessIcon/> : <ExpandMoreIcon/>}
-          </ListItem>
-          <Collapse in={openCollapse} timeout="auto" unmountOnExit>
-          <List disablePadding>
-            <Divider variant={'middle'}  className={{[classes.hide]: open}}/>
-              <ListItem button className={{[classes.nested]: open,}}>
-                <ListItemIcon><HomeIcon /></ListItemIcon>
-                <ListItemText primary="League of Legends" />
-              </ListItem>
-              <ListItem button className={{[classes.nested]: open}}>
-                <ListItemIcon><HomeIcon/></ListItemIcon>
-                <ListItemText primary="Teamfight Tactics"/>
-              </ListItem>
-            </List>
-          </Collapse>
-        </List>
-        <Divider />
-        <List>
-          <ListItem button component='a' href={"https://github.com/jchailatte"} key={"GitHub"}>
-            <ListItemIcon><GithubIcon/></ListItemIcon>
-            <ListItemText primary={"GitHub"}/>
-          </ListItem>
-          <ListItem button component='a' href={"https://www.linkedin.com/in/jchailatte/"} key={"LinkedIn"}>
-            <ListItemIcon><LinkedInIcon/></ListItemIcon>
-            <ListItemText primary={"LinkedIn"}/>
-          </ListItem>
-        </List>
+        <div>
+          <Divider/>
+          <List>
+            <Itemsr items={footer}></Itemsr>
+          </List>
+        </div>
       </Drawer>
     </div>
   );
