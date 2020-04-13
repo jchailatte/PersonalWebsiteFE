@@ -1,8 +1,10 @@
-import '../css/styles.css'
-                       
-import NextApp from 'next/app'
-import React from 'react'
-import { ThemeProvider } from 'styled-components'
+import NextApp from 'next/app';
+import React from 'react';
+import { ThemeProvider } from 'styled-components';
+import Head from 'next/head';
+
+import '../css/styles.css';
+
 const theme = {
 
 }
@@ -17,6 +19,9 @@ export default class App extends NextApp {
     const { Component, pageProps } = this.props
     return (
       <ThemeProvider theme={theme}>
+        <Head>
+          <link rel="icon" href='/graphics/logo.ico'/>
+        </Head>
         <Component {...pageProps} />
       </ThemeProvider>
     )

@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    background: '#DBCDC6',
+    background: '#FCFCFC',
   },
   drawerOpen: {
     [theme.breakpoints.up('md')]:{
@@ -93,7 +93,7 @@ const useStyles = makeStyles((theme) => ({
   fontstyle:{
     fontFamily: "'Karla', sans-serif",
     fontSize: '18px',
-  },
+  }
 }));
 
 export default function MiniDrawer(prop) {
@@ -221,6 +221,8 @@ export default function MiniDrawer(prop) {
               {!open ? <ChevronRightIcon className={classes.iconcolor} /> : <ChevronLeftIcon className={classes.iconcolor} />}
             </IconButton>
           </div>
+          <Divider />
+          <img src={"graphics/logo.png"} ></img>
           <Divider />
           <List>
             <Itemsr items={sbitems}></Itemsr>

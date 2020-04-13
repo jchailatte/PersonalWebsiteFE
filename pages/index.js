@@ -3,8 +3,6 @@ import ReactDOM from 'react-dom'
 import Drawer from '../components/Drawer'
 import { makeStyles, useTheme} from '@material-ui/core/styles';
 
-import bg from '../graphics/homepage.gif';
-
 const useStyles = makeStyles((theme)=>(
 {
     root: {
@@ -14,7 +12,7 @@ const useStyles = makeStyles((theme)=>(
       height: '100vh',
       backgroundColor: '#f7f1e1',
   
-      backgroundImage: `url(${bg})`,
+      backgroundImage: `url('/graphics/homepage.gif')`,
       backgroundRepeat: 'no-repeat',
       backgroundAttachment: 'fixed',
       backgroundPosition: 'right',
