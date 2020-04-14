@@ -1,3 +1,6 @@
+fix that stupid Typography issue
+    if u cant just hit it with the <br> hammer >_>
+
 finalize color palette
     maybe make a theme and apply it
 
@@ -6,6 +9,9 @@ center the background image so that img doesnt get cut off when being responsive
         maybe a math formula hmm
 
 fix logo styling as well as interaction with the sidebar when the sidebar closes
+
+set up backend at some point 
+    shift the quote picking to the backend 
 
 finalize the font and download it (debating if i should just keep <link>)
     mayb make the font thicker

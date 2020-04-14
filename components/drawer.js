@@ -10,6 +10,11 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Collapse from '@material-ui/core/Collapse';
+import Typography from '@material-ui/core/Typography';
+
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+
 
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
@@ -91,8 +96,12 @@ const useStyles = makeStyles((theme) => ({
   iconcolor:{
   },
   fontstyle:{
-    fontFamily: "'Karla', sans-serif",
+    fontFamily: "'Source Sans Pro', sans-serif",
     fontSize: '18px',
+  },
+  test:{
+    maxWidth:150,
+    height:300,
   }
 }));
 
@@ -118,7 +127,8 @@ export default function MiniDrawer(prop) {
   [
     {
       text: 'Home',
-      icon: <HomeIcon/>
+      icon: <HomeIcon/>,
+      href: '/',
     },
     {
       text: 'About',
@@ -140,6 +150,7 @@ export default function MiniDrawer(prop) {
       text: 'Riot',
       icon: <HomeIcon/>,
       nested: true,
+      disable: false,
       children: 
         [
           {
@@ -168,30 +179,34 @@ export default function MiniDrawer(prop) {
     }
   ];
 
-  function Itemsr({items})
+  function Itemsr({items,depth})
   {
     return(
     items.map((item,index) => (
-      <React.Fragment>
+      <React.Fragment key={item.text}>
       {!item.nested ? (
-          <ListItem button component='a' href={item.href} key={item.text} selected={prop.selected == item.text}>
+          <ListItem button component='a' href={item.href}
+            selected={prop.selected == item.text} 
+            className={clsx({[classes.nested]: open && depth>0})}
+            disabled={item.disable}
+          >
             <ListItemIcon>{item.icon}</ListItemIcon>
             <ListItemText primary={item.text} className={classes.fontstyle} disableTypography></ListItemText>
           </ListItem>
         ):(
-        <>
-          <ListItem button onClick={handleOpenSetting}>
+        <React.Fragment key={item.text}>
+          <ListItem button onClick={handleOpenSetting} disabled={item.disable}>
             <ListItemIcon>{item.icon}</ListItemIcon>
             <ListItemText primary={item.text} className={classes.fontstyle} disableTypography/>
             {openCollapse ? <ExpandLessIcon/> : <ExpandMoreIcon/>}
           </ListItem>
           <Collapse in={openCollapse} timeout="auto" unmountOnExit>
             <List disablePadding>
-              <Divider variant={'middle'}  className={{[classes.hide]: open}}/>
-              <Itemsr items={item.children}></Itemsr>
+              <Divider variant={"middle"} className={clsx({[classes.hide]: open})}/>
+              <Itemsr items={item.children} depth={depth+1}></Itemsr>
             </List>
           </Collapse>
-        </>
+        </React.Fragment>
       )}
       </React.Fragment>
     )));
@@ -199,8 +214,7 @@ export default function MiniDrawer(prop) {
 
   return (
     <div className={classes.root}>
-      <link href="https://fonts.googleapis.com/css2?family=La+Belle+Aurore&display=swap" rel="stylesheet"></link>
-      <link href="https://fonts.googleapis.com/css2?family=Karla&family=La+Belle+Aurore&display=swap" rel="stylesheet"></link>
+      <link href="https://fonts.googleapis.com/css2?family=Muli:wght@300&family=Source+Sans+Pro:wght@300&display=swap" rel="stylesheet"/>
       <CssBaseline />
       <Drawer
         variant="permanent"
@@ -222,16 +236,33 @@ export default function MiniDrawer(prop) {
             </IconButton>
           </div>
           <Divider />
-          <img src={"graphics/logo.png"} ></img>
+          <List>
+            <ListItem component='a' href="/">
+              <img src={"graphics/logo.png"} alt='logo' height="100" width="100"></img>
+            </ListItem>
+            <ListItem >
+            <ListItemText >
+              <Typography paragraph>
+              Snow can only live in the winter. 
+              When it nears a fire, it dies. 
+              That is its life. It may yearn for summer, but, it can only
+              desire it. In my hand, the snow
+              becomes water, because this
+              is not its world... 
+              </Typography>
+            </ListItemText>
+            </ListItem>
+          </List>
+
           <Divider />
           <List>
-            <Itemsr items={sbitems}></Itemsr>
+            <Itemsr items={sbitems} depth={0}></Itemsr>
           </List>
         </div>
         <div>
           <Divider/>
           <List>
-            <Itemsr items={footer}></Itemsr>
+            <Itemsr items={footer} depth={0}></Itemsr>
           </List>
         </div>
       </Drawer>
