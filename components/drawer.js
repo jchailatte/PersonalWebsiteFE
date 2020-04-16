@@ -55,8 +55,7 @@ const useStyles = makeStyles((theme) => ({
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.enteringScreen,
       })},
-    [theme.breakpoints.down('md')]:
-    {
+    [theme.breakpoints.down('md')]: {
       width: theme.spacing(7) +1,
     },
   },
@@ -80,7 +79,7 @@ const useStyles = makeStyles((theme) => ({
     },
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'flex-end',
+    justifyContent: 'space-between',
     padding: theme.spacing(0, 1),
   },
   content: {
@@ -91,7 +90,7 @@ const useStyles = makeStyles((theme) => ({
       paddingLeft: theme.spacing(4),
   },
   hide: {
-    opacity: 0,
+    display: 'none',
   }, 
   iconcolor:{
   },
@@ -99,10 +98,20 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "'Source Sans Pro', sans-serif",
     fontSize: '18px',
   },
-  test:{
-    maxWidth:150,
-    height:300,
-  }
+  quote:{
+    whiteSpace:'normal',
+    fontFamily:"'Long Cang', cursive",
+    fontSize: '16px',
+  },
+  logo:{
+    marginTop: '10px',
+  },
+  direction:{
+    transition: theme.transitions.create(
+      ['flexDirection','column'],
+       {duration: theme.transitions.duration.leavingScreen,
+    })},
+
 }));
 
 export default function MiniDrawer(prop) {
@@ -215,6 +224,7 @@ export default function MiniDrawer(prop) {
   return (
     <div className={classes.root}>
       <link href="https://fonts.googleapis.com/css2?family=Muli:wght@300&family=Source+Sans+Pro:wght@300&display=swap" rel="stylesheet"/>
+      <link href="https://fonts.googleapis.com/css2?family=Long+Cang&display=swap" rel="stylesheet"></link>
       <CssBaseline />
       <Drawer
         variant="permanent"
@@ -230,30 +240,28 @@ export default function MiniDrawer(prop) {
         }}
       >
         <div>
-          <div className={classes.toolbar}>
+          <div className={clsx(classes.toolbar,{[classes.direction]:!open})}>
+            <a href="/">
+              <img src={"graphics/logo.png"} alt='logo' height="40" width="40" className={classes.logo}></img>
+            </a>
             <IconButton onClick={open ? handleDrawerClose : handleDrawerOpen}>
               {!open ? <ChevronRightIcon className={classes.iconcolor} /> : <ChevronLeftIcon className={classes.iconcolor} />}
             </IconButton>
           </div>
+          <ListItem className={clsx({[classes.hide]: !open})}>
           <Divider />
-          <List>
-            <ListItem component='a' href="/">
-              <img src={"graphics/logo.png"} alt='logo' height="100" width="100"></img>
-            </ListItem>
-            <ListItem >
-            <ListItemText >
-              <Typography paragraph>
+          <ListItemText >
+            <Typography gutterBottom color={'textSecondary'} className={classes.quote} align={"left"}>
               Snow can only live in the winter. 
               When it nears a fire, it dies. 
               That is its life. It may yearn for summer, but, it can only
               desire it. In my hand, the snow
               becomes water, because this
-              is not its world... 
-              </Typography>
-            </ListItemText>
-            </ListItem>
-          </List>
-
+              is not its world...
+            </Typography>
+            <Typography className={classes.quote} color={'textSecondary'} align={"right"}>-ISSTH </Typography>
+          </ListItemText>
+          </ListItem>
           <Divider />
           <List>
             <Itemsr items={sbitems} depth={0}></Itemsr>
