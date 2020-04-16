@@ -12,10 +12,6 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Collapse from '@material-ui/core/Collapse';
 import Typography from '@material-ui/core/Typography';
 
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-
-
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
@@ -72,11 +68,6 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   toolbar: {
-    [theme.breakpoints.down('md')]:
-    {
-      pointerEvents: 'none',
-      opacity: '0.4',
-    },
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -89,10 +80,30 @@ const useStyles = makeStyles((theme) => ({
   nested: {
       paddingLeft: theme.spacing(4),
   },
-  hide: {
-    display: 'none',
-  }, 
-  iconcolor:{
+  opennested:{
+    [theme.breakpoints.down('md')]:
+    {
+      paddingLeft: theme.spacing(2),
+    }
+  },
+  nestedbackground: {
+    background: '#F2F2F2',
+  },
+  hide:{
+    display:'none'
+  },
+  closehide: {
+    [theme.breakpoints.down('md')]:
+    {
+      display: 'none',
+    }
+  },
+  iconbutton:{
+    [theme.breakpoints.down('md')]:
+    {
+      pointerEvents: 'none',
+      opacity: '0.4',
+    },
   },
   fontstyle:{
     fontFamily: "'Source Sans Pro', sans-serif",
@@ -106,12 +117,6 @@ const useStyles = makeStyles((theme) => ({
   logo:{
     marginTop: '10px',
   },
-  direction:{
-    transition: theme.transitions.create(
-      ['flexDirection','column'],
-       {duration: theme.transitions.duration.leavingScreen,
-    })},
-
 }));
 
 export default function MiniDrawer(prop) {
@@ -153,7 +158,8 @@ export default function MiniDrawer(prop) {
     },
     {
       text: 'Thoughts',
-      icon: <ForumIcon/>
+      icon: <ForumIcon/>,
+      disable: true
     },
     {
       text: 'Riot',
@@ -196,7 +202,7 @@ export default function MiniDrawer(prop) {
       {!item.nested ? (
           <ListItem button component='a' href={item.href}
             selected={prop.selected == item.text} 
-            className={clsx({[classes.nested]: open && depth>0})}
+            className={clsx(classes.opennested,{[classes.nested]: open && depth>0},{[classes.nestedbackground]:depth>0})}
             disabled={item.disable}
           >
             <ListItemIcon>{item.icon}</ListItemIcon>
@@ -211,7 +217,6 @@ export default function MiniDrawer(prop) {
           </ListItem>
           <Collapse in={openCollapse} timeout="auto" unmountOnExit>
             <List disablePadding>
-              <Divider variant={"middle"} className={clsx({[classes.hide]: open})}/>
               <Itemsr items={item.children} depth={depth+1}></Itemsr>
             </List>
           </Collapse>
@@ -241,14 +246,14 @@ export default function MiniDrawer(prop) {
       >
         <div>
           <div className={clsx(classes.toolbar,{[classes.direction]:!open})}>
-            <a href="/">
+            <a href="/" className={clsx({[classes.hide]: !open})}>
               <img src={"graphics/logo.png"} alt='logo' height="40" width="40" className={classes.logo}></img>
             </a>
-            <IconButton onClick={open ? handleDrawerClose : handleDrawerOpen}>
-              {!open ? <ChevronRightIcon className={classes.iconcolor} /> : <ChevronLeftIcon className={classes.iconcolor} />}
+            <IconButton onClick={open ? handleDrawerClose : handleDrawerOpen} className={classes.iconbutton}>
+              {!open ? <ChevronRightIcon/> : <ChevronLeftIcon/>}
             </IconButton>
           </div>
-          <ListItem className={clsx({[classes.hide]: !open})}>
+          <ListItem className={clsx(classes.closehide,{[classes.hide]: !open})}>
           <Divider />
           <ListItemText >
             <Typography gutterBottom color={'textSecondary'} className={classes.quote} align={"left"}>
