@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme} from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -23,6 +23,8 @@ import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import HomeIcon from '@material-ui/icons/Home';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+
+import {TweenLite, gsap} from 'gsap';
 
 const drawerWidth = 250;
 
@@ -70,7 +72,7 @@ const useStyles = makeStyles((theme) => ({
   toolbar: {
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-end',
     padding: theme.spacing(0, 1),
   },
   content: {
@@ -119,17 +121,19 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
 export default function MiniDrawer(prop) {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(true);
   const [openCollapse, setOpenCollapse] = React.useState(false);
+  const [onload, setOnLoad] = React.useState(true);
 
-  const handleDrawerOpen = () => {
+  var handleDrawerOpen = () => {
     setOpen(true);
   };
 
-  const handleDrawerClose = () => {
+  var handleDrawerClose = () => {
     setOpen(false);
   };
 
@@ -227,7 +231,7 @@ export default function MiniDrawer(prop) {
   }
 
   return (
-    <div className={classes.root}>
+  <div className={classes.root}>
       <link href="https://fonts.googleapis.com/css2?family=Muli:wght@300&family=Source+Sans+Pro:wght@300&display=swap" rel="stylesheet"/>
       <link href="https://fonts.googleapis.com/css2?family=Long+Cang&display=swap" rel="stylesheet"></link>
       <CssBaseline />
@@ -245,8 +249,9 @@ export default function MiniDrawer(prop) {
         }}
       >
         <div>
-          <div className={clsx(classes.toolbar,{[classes.direction]:!open})}>
-            <a href="/" className={clsx({[classes.hide]: !open})}>
+
+          <div className={clsx(classes.toolbar/*,{[classes.direction]:!open}*/)}>
+          <a href="/"id='logo'>
               <img src={"graphics/logo.png"} alt='logo' height="40" width="40" className={classes.logo}></img>
             </a>
             <IconButton onClick={open ? handleDrawerClose : handleDrawerOpen} className={classes.iconbutton}>
@@ -268,7 +273,7 @@ export default function MiniDrawer(prop) {
           </ListItemText>
           </ListItem>
           <Divider />
-          <List>
+          <List id='mainsb'>
             <Itemsr items={sbitems} depth={0}></Itemsr>
           </List>
         </div>
