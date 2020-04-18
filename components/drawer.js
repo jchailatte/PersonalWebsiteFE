@@ -119,6 +119,10 @@ const useStyles = makeStyles((theme) => ({
   logo:{
     marginTop: '10px',
   },
+  content: {
+    flexGrow: 1,
+    padding: theme.spacing(3)
+  },
 }));
 
 
@@ -154,7 +158,8 @@ export default function MiniDrawer(prop) {
     },
     {
       text: 'Projects',
-      icon: <CodeIcon/>
+      icon: <CodeIcon/>,
+      href: '/projects',
     },
     {
       text: 'Rooms',
@@ -251,9 +256,10 @@ export default function MiniDrawer(prop) {
         <div>
 
           <div className={clsx(classes.toolbar/*,{[classes.direction]:!open}*/)}>
-          <a href="/"id='logo'>
+            <a href="/"id='logo'>
               <img src={"graphics/logo.png"} alt='logo' height="40" width="40" className={classes.logo}></img>
             </a>
+            <div style={{width:60}}></div>
             <IconButton onClick={open ? handleDrawerClose : handleDrawerOpen} className={classes.iconbutton}>
               {!open ? <ChevronRightIcon/> : <ChevronLeftIcon/>}
             </IconButton>
@@ -284,6 +290,9 @@ export default function MiniDrawer(prop) {
           </List>
         </div>
       </Drawer>
+      <main className ={classes.content}>
+        {prop.children}
+      </main>
     </div>
   );
 }
