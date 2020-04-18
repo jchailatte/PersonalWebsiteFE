@@ -20,23 +20,16 @@ const useStyles = makeStyles((theme)=>(
       }
     },
     height:{
-        height:'100vh',
+        minHeight:'100vh',
     },
-    blur:{
-        backdropFilter: 'blur(10px)',
-    }
-}
-));
+}));
 
 export default function Background(props) {
   const classes = useStyles();
   
-  console.log(props.blur);
   return(
-    <div className={clsx(classes.container)}>
-        <div className={clsx({[classes.height]:props.height},{[classes.blur]: props.blur})}>
+    <div className={clsx(classes.container,{[classes.height]:props.height})}>
         {props.children}
-        </div>
     </div>
   )
 }

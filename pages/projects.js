@@ -9,7 +9,6 @@ import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import Paper from '@material-ui/core/Paper';
 
 import Background from '../components/background';
 import Sidebar from '../components/sidebar';
@@ -19,9 +18,6 @@ const useStyles = makeStyles((theme)=>(
     media:{
         height:160,
     },
-    blur:{
-        backdropFilter: 'blur(10px)',
-    }
 }));
 
 const items=
@@ -30,26 +26,47 @@ const items=
         text: 'Twitch Stonks',
         image: '/graphics/twitchstonks.png',
         blurb: 'Many streamers can benefit from increased chat interaction and more reasons to receive bits and cheers. TwitchStonks allows viewers to anticipate heroic plays or embarrassing fails.',
-        devpost: 'https://devpost.com/software/twitchstonks',
-        github: 'https://github.com/PeterYangIO/twitchcon2019',
+        button1: 'Devpost',
+        button2: 'GitHub',
+        href1: 'https://devpost.com/software/twitchstonks',
+        href2: 'https://github.com/PeterYangIO/twitchcon2019',
     },
     {
         text: 'Hitch \'n Ditch',
         image: '/graphics/hitchnditch.jpg',
         blurb: 'Hitch \'n Ditch allows users to have the freedom of a car sharing service such as Maven or Zipcar but further aims to reduce congestion by utilizing "last mile delivery". Rather than giving the user full autonomy, within the last mile of driving, the user will be prompted to pick up the next person to drive the car.',
-        devpost: 'https://devpost.com/software/hitch-n-ditch',
-        github: 'https://github.com/jchailatte/Hitch-n-Ditch'
+        button1: 'Devpost',
+        button2: 'GitHub',
+        href1: 'https://devpost.com/software/hitch-n-ditch',
+        github: 'https://github.com/jchailatte/Hitch-n-Ditch',
     },
     {
         text: 'Streamer Trivia',
         image: '/graphics/streamertrivia.jpg',
         blurb: 'We wanted to help broadcasters engage with their viewers. We decided that a Family Feud style game would be a super fun way for broadcasters to get viewers involved in their stream.',
         note: 'Note: This was my first Hackathon so pardon the code...it\'s awful',
-        devpost: 'https://devpost.com/software/streamer-trivia',
+        button1: 'Devpost',
+        button2: 'GitHub',
+        href1: 'https://devpost.com/software/streamer-trivia',
         github: 'https://github.com/jchailatte/StreamerTrivia',
     },
-
-    
+    {
+        text: 'I\'m Hungry',
+        image: '/graphics/imhungry.png',
+        blurb: 'Software Engineering class project. A Yelp like application that allows the user to query a type of food and it will return various recipes as well as nearby restaurants within the desired distance.',
+        button1: 'Github',
+        button2: '',
+        href1: 'https://github.com/jchailatte/ImHungry-Agile-',
+    },
+    {
+        text: 'CS@SC Summer Camps',
+        image: '/graphics/summercamp.png',
+        blurb: 'Capstone Project(legacy from 2016). Added to and fixed(aka deleted) the backend and migrated the site to another server (which had a firewall yay).',
+        note: 'Note: Can\'t really see much that I did on the site as all the functionalities require an account but I spent way to many hours to not include this project.',
+        button1: 'Go to',
+        button2: '',
+        href1: 'https://summercamp.usc.edu/',
+    }
 ];
 
 export default function Projects(prop) {
@@ -82,11 +99,11 @@ export default function Projects(prop) {
                         </CardContent>
                     </CardActionArea>
                     <CardActions>
-                        <Button size="small" color="primary" href={item.devpost}>
-                            Learn More
+                        <Button size="small" color="primary" href={item.href1} disabled={item.button1==''}>
+                            {item.button1}
                         </Button>
-                        <Button size="small" color="primary" href={item.github}>
-                            GitHub
+                        <Button size="small" color="primary" disabled={item.button2==''}>
+                            {item.button2}
                         </Button>
                     </CardActions>
                     </Card>
@@ -96,12 +113,12 @@ export default function Projects(prop) {
     }
 
     return(
-        <Background blur={true} height={true}>  
-        <Sidebar selected={'Projects'}>
-            <Grid container spacing={3} >
-                <Projectsr items={items}></Projectsr>
-            </Grid>
-        </Sidebar>
+        <Background height={true}>
+            <Sidebar selected={'Projects'}>
+                <Grid container spacing={3} >
+                    <Projectsr items={items}></Projectsr>
+                </Grid>
+            </Sidebar>
         </Background>
     )
 };
