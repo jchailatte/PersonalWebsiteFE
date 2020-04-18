@@ -1,17 +1,11 @@
 import React, {useState, Component} from 'react'
-import ReactDOM from 'react-dom'
-import Drawer from '../components/Drawer'
+import clsx from 'clsx';
 import { makeStyles, useTheme} from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme)=>(
 {
-    root: {
-      display:'flex',
-    },
     container: {
-      height: '100vh',
       backgroundColor: '#f7f1e1',
-  
       backgroundImage: `url('/graphics/homepage.gif')`,
       backgroundRepeat: 'no-repeat',
       backgroundAttachment: 'fixed',
@@ -25,15 +19,24 @@ const useStyles = makeStyles((theme)=>(
         backgroundPosition: '80%',
       }
     },
+    height:{
+        height:'100vh',
+    },
+    blur:{
+        backdropFilter: 'blur(10px)',
+    }
 }
 ));
 
 export default function Background(props) {
   const classes = useStyles();
   
+  console.log(props.blur);
   return(
-    <div className={classes.container}>
+    <div className={clsx(classes.container)}>
+        <div className={clsx({[classes.height]:props.height},{[classes.blur]: props.blur})}>
         {props.children}
+        </div>
     </div>
   )
 }
