@@ -1,6 +1,6 @@
-import React, {useState, Component} from 'react'
+import React from 'react';
 import clsx from 'clsx';
-import { makeStyles, useTheme} from '@material-ui/core/styles';
+import { makeStyles} from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme)=>(
 {

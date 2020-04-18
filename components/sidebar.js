@@ -135,7 +135,8 @@ const sbitems =
     },
     {
         text: 'About',
-        icon: <AccountBoxIcon/>
+        icon: <AccountBoxIcon/>,
+        href: '/about',
     },
     {
         text: 'Projects',
@@ -144,7 +145,8 @@ const sbitems =
     },
     {
         text: 'Rooms',
-        icon: <MeetingRoomIcon/>
+        icon: <MeetingRoomIcon/>,
+        disable: true
     },
     {
         text: 'Thoughts',
@@ -155,7 +157,7 @@ const sbitems =
         text: 'Riot',
         icon: <HomeIcon/>,
         nested: true,
-        disable: false,
+        disable: true,
         children: 
         [
             {
