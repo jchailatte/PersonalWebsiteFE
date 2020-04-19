@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme)=>(
 {
     media:{
         height:160,
-    },
+    },    
 }));
 
 const items=
@@ -60,7 +60,7 @@ const items=
     {
         text: 'CS@SC Summer Camps',
         image: '/graphics/summercamp.png',
-        blurb: 'Capstone Project(legacy from 2016). Added to and fixed(aka deleted) the backend and migrated the site to another server (which had a firewall yay).',
+        blurb: 'Capstone Project(legacy from 2016). Added to and fixed(aka deleted) parts of the backend and migrated the WordPress site to another server (which had a firewall yay).',
         note: 'Note: Can\'t really see much that I did on the site as all the functionalities require an account but I spent way to many hours to not include this project.',
         button1: 'Go to',
         button2: '',
@@ -76,7 +76,7 @@ export default function Projects(prop) {
         return(
         items.map((item,index)=>(
             <React.Fragment key={item.text}>
-            <Grid item xs={4}>
+            <Grid item xs={12} sm={6} md={4} lg={4}>
                 <Card>
                     <CardActionArea disabled>
                         <CardMedia
@@ -113,8 +113,8 @@ export default function Projects(prop) {
 
     return(
         <Background height={true}>
-            <Sidebar selected={'Projects'}>
-                <Grid container spacing={3} >
+            <Sidebar selected={'Projects'} blur={true}>
+                <Grid container spacing={3}>
                     <Projectsr items={items}></Projectsr>
                 </Grid>
             </Sidebar>

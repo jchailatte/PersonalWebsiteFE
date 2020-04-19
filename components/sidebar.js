@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
 import clsx from 'clsx';
-import { makeStyles, useTheme} from '@material-ui/core/styles';
+import { makeStyles} from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -23,6 +22,7 @@ import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import HomeIcon from '@material-ui/icons/Home';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import EmailIcon from '@material-ui/icons/Email';
 
 import {TweenLite, gsap} from 'gsap';
 
@@ -122,7 +122,10 @@ const useStyles = makeStyles((theme) => ({
     },
     content: {
         flexGrow: 1,
-        padding: theme.spacing(3)
+        padding: theme.spacing(3),
+    },
+    blur:{
+        backdropFilter: 'blur(10px)',
     }
 }));
 
@@ -144,6 +147,11 @@ const sbitems =
         href: '/projects',
     },
     {
+        text: 'Contact Me',
+        icon: <EmailIcon/>,
+        disable: true,
+    },
+    {
         text: 'Rooms',
         icon: <MeetingRoomIcon/>,
         disable: true
@@ -153,23 +161,23 @@ const sbitems =
         icon: <ForumIcon/>,
         disable: true
     },
-    {
-        text: 'Riot',
-        icon: <HomeIcon/>,
-        nested: true,
-        disable: true,
-        children: 
-        [
-            {
-                text: 'League of Legends',
-                icon: <HomeIcon/>
-            },
-            {
-                text: 'TeamFight Tactics',
-                icon: <HomeIcon/>
-            }
-        ]
-    }
+    // {
+    //     text: 'Riot',
+    //     icon: <HomeIcon/>,
+    //     nested: true,
+    //     disable: true,
+    //     children: 
+    //     [
+    //         {
+    //             text: 'League of Legends',
+    //             icon: <HomeIcon/>
+    //         },
+    //         {
+    //             text: 'TeamFight Tactics',
+    //             icon: <HomeIcon/>
+    //         }
+    //     ]
+    // }
 ];
 
 const footer =
@@ -289,7 +297,7 @@ return (
             </List>
         </div>
         </Drawer>
-        <main className ={classes.content}>
+        <main className ={clsx(classes.content,{[classes.blur]:prop.blur})}>
             {prop.children}
         </main>
     </div>
