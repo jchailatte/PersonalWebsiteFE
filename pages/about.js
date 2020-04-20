@@ -58,13 +58,11 @@ const useStyles = makeStyles((theme) => ({
         textAlign: 'center',
     },
     listbackground:{
-        backgroundImage: `url(/graphics/stroke.png)`,
-        backgroundRepeat: 'repeat-y',
+        backgroundImage: `url(/graphics/flatstroke.png)`,
         backgroundSize: '100% 100%'
     },
     sumbackground:{
-        backgroundImage: `url(/graphics/stroke.png)`,
-        backgroundRepeat: 'repeat-y',
+        backgroundImage: `url(/graphics/flatstroke.png)`,
         backgroundSize: '100% 100%',
     },
     itemstyle1:
