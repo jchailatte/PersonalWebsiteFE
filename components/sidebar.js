@@ -24,8 +24,6 @@ import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import EmailIcon from '@material-ui/icons/Email';
 
-import {TweenLite, gsap} from 'gsap';
-
 const drawerWidth = 250;
 
 const useStyles = makeStyles((theme) => ({
@@ -126,6 +124,7 @@ const useStyles = makeStyles((theme) => ({
     },
     blur:{
         backdropFilter: 'blur(10px)',
+        minHeight: '100vh'
     }
 }));
 
@@ -262,7 +261,7 @@ return (
         }}
         >
         <div>
-            <div className={clsx(classes.toolbar/*,{[classes.direction]:!open}*/)}>
+            <div className={classes.toolbar}>
                 <a href="/"id='logo'>
                     <img src={"graphics/logo.png"} alt='logo' height="40" width="40" className={classes.logo}></img>
                 </a>
