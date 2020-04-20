@@ -15,8 +15,13 @@ import Sidebar from '../components/sidebar';
 const useStyles = makeStyles((theme)=>(
 {
     media:{
-        height:160,
+        height:170,
     },    
+    grow:{
+        display: 'flex',
+        flexGrow: 1,
+        justifyContent: 'space-between'
+    }
 }));
 
 const items=
@@ -24,7 +29,7 @@ const items=
     {
         text: 'Twitch Stonks',
         image: '/graphics/twitchstonks.png',
-        blurb: 'Many streamers can benefit from increased chat interaction and more reasons to receive bits and cheers. TwitchStonks allows viewers to anticipate heroic plays or embarrassing fails.',
+        blurb: 'Many streamers can benefit from increased chat interaction and more reasons to receive bits and cheers. TwitchStonks allows viewers to anticipate heroic plays or embarrassing fails. Play stocks with your favorite streamers with none of the risk.',
         button1: 'Devpost',
         button2: 'GitHub',
         href1: 'https://devpost.com/software/twitchstonks',
@@ -76,15 +81,15 @@ export default function Projects(prop) {
         return(
         items.map((item,index)=>(
             <React.Fragment key={item.text}>
-            <Grid item xs={12} sm={6} md={4} lg={4}>
-                <Card>
-                    <CardActionArea disabled>
+            <Grid item xs={12} sm={6} md={4} lg={4} className={classes.grow}>
+                <Card >
+                    <CardActionArea disabled style={{height:'90%'}}>
                         <CardMedia
                         className={classes.media}
                         image={item.image}
                         title={item.text}
                         />
-                        <CardContent>
+                        <CardContent style={{height: '60%'}}>
                             <Typography gutterBottom variant="h5" component="h2">
                                 {item.text}
                             </Typography>
@@ -105,8 +110,8 @@ export default function Projects(prop) {
                             {item.button2}
                         </Button>
                     </CardActions>
-                    </Card>
-                </Grid>
+                </Card>
+            </Grid>
             </React.Fragment>
         )));
     }

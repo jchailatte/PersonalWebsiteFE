@@ -14,3 +14,5 @@ maybe make a janky under construction page
 potentially add transitions to the pages 
     if not just uninstall gsap
 
+https://gist.github.com/Kocisov/2a9567eb51b83dfef48efce02ef3ab06?fbclid=IwAR2bxrp91Prd60CaWyp0Tgla4i4WT2m6oP-O0KcHYJuBJZo2d-_Y3n0h3Ec
+

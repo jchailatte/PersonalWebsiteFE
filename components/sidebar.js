@@ -45,14 +45,14 @@ const useStyles = makeStyles((theme) => ({
         background: '#FCFCFC',
     },
     drawerOpen: {
-        [theme.breakpoints.up('md')]:{
+        [theme.breakpoints.up('sm')]:{
             width: drawerWidth,
             transition: theme.transitions.create('width', {
                 easing: theme.transitions.easing.sharp,
                 duration: theme.transitions.duration.enteringScreen,
             })
         },
-        [theme.breakpoints.down('md')]:{
+        [theme.breakpoints.down('sm')]:{
             width: theme.spacing(7) +1,
         },
     },
@@ -64,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
         }),
         overflowX: 'hidden',
         width: theme.spacing(7) + 1,
-        [theme.breakpoints.up('md')]: {
+        [theme.breakpoints.up('sm')]: {
             width: theme.spacing(7) + 1,
         },
     },
@@ -82,7 +82,7 @@ const useStyles = makeStyles((theme) => ({
         paddingLeft: theme.spacing(4),
     },
     opennested:{
-        [theme.breakpoints.down('md')]:
+        [theme.breakpoints.down('sm')]:
         {
             paddingLeft: theme.spacing(2),
         }
@@ -94,25 +94,28 @@ const useStyles = makeStyles((theme) => ({
         display:'none'
     },
     closehide: {
-        [theme.breakpoints.down('md')]:
+        [theme.breakpoints.down('sm')]:
         {
             display: 'none',
         }
     },
     iconbutton:{
-        [theme.breakpoints.down('md')]:
+        [theme.breakpoints.down('sm')]:
         {
             pointerEvents: 'none',
             opacity: '0.4',
         },
     },
     fontstyle:{
-        fontFamily: "'Source Sans Pro', sans-serif",
-        fontSize: '18px',
+        fontFamily: "'Rock Salt', cursive",
+        fontWeight: 'bold',
+        fontSize: '14px',
     },
     quote:{
         whiteSpace:'normal',
-        fontFamily:"'Long Cang', cursive",
+        fontWeight: 'bold',
+        fontFamily:"'Shadows Into Light', cursive",
+        
         fontSize: '16px',
     },
     logo:{
@@ -125,6 +128,13 @@ const useStyles = makeStyles((theme) => ({
     blur:{
         backdropFilter: 'blur(10px)',
         minHeight: '100vh'
+    },
+    title:{
+        width:140,
+        textAlign:'center',
+        fontFamily: "'Rock Salt', cursive",
+        fontWeight: 'bold',
+        fontSize: '20px'
     }
 }));
 
@@ -184,12 +194,14 @@ const footer =
     {
         text: 'GitHub',
         icon: <GithubIcon/>,
-        href: 'https://github.com/jchailatte'
+        href: 'https://github.com/jchailatte',
+        target: "_blank"
     },
     {
         text: 'LinkedIn',
         icon: <LinkedInIcon/>,
-        href: 'https://www.linkedin.com/in/jchailatte/'
+        href: 'https://www.linkedin.com/in/jchailatte/',
+        target: "_blank"
     }
 ];
 
@@ -216,7 +228,7 @@ function Itemsr({items,depth})
         items.map((item,index) => (
         <React.Fragment key={item.text}>
         {!item.nested ? (
-        <ListItem button component='a' href={item.href}
+        <ListItem button component='a' href={item.href} target={item.target}
             selected={prop.selected == item.text} 
             className={clsx(classes.opennested,{[classes.nested]: open && depth>0},{[classes.nestedbackground]:depth>0})}
             disabled={item.disable}
@@ -244,9 +256,10 @@ function Itemsr({items,depth})
 
 return (
     <div className={classes.root}>
-    <link href="https://fonts.googleapis.com/css2?family=Muli:wght@300&family=Source+Sans+Pro:wght@300&display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Long+Cang&display=swap" rel="stylesheet"></link>
-        <CssBaseline />
+    <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap" rel="stylesheet"></link>
+    <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap" rel="stylesheet"></link>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap" rel="stylesheet"></link>
+    <CssBaseline />
         <Drawer
         variant="permanent"
         className={clsx(classes.drawer, {
@@ -262,10 +275,10 @@ return (
         >
         <div>
             <div className={classes.toolbar}>
-                <a href="/"id='logo'>
+                <a href="/" id='logo'>
                     <img src={"graphics/logo.png"} alt='logo' height="40" width="40" className={classes.logo}></img>
                 </a>
-                <div style={{width:60}}></div>
+                <div className={classes.title}>CaeCeus</div>
                 <IconButton onClick={open ? handleDrawerClose : handleDrawerOpen} className={classes.iconbutton}>
                 {!open ? <ChevronRightIcon/> : <ChevronLeftIcon/>}
                 </IconButton>
@@ -274,14 +287,11 @@ return (
                 <Divider />
                 <ListItemText >
                     <Typography gutterBottom color={'textSecondary'} className={classes.quote} align={"left"}>
-                        Snow can only live in the winter. 
-                        When it nears a fire, it dies. 
-                        That is its life. It may yearn for summer, but, it can only
-                        desire it. In my hand, the snow
-                        becomes water, because this
-                        is not its world...
+                    Potions had a cooldown.
+                    What was the best way to drink potions to keep up your endurance during battle?
+                    That itself was a type of knowledge.
                     </Typography>
-                    <Typography className={classes.quote} color={'textSecondary'} align={"right"}>-ISSTH </Typography>
+                    <Typography className={classes.quote} color={'textSecondary'} align={"right"}>-The King's Avatar </Typography>
                 </ListItemText>
             </ListItem>
             <Divider />

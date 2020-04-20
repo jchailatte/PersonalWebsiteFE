@@ -9,11 +9,11 @@ const useStyles = makeStyles((theme)=>(
       backgroundRepeat: 'no-repeat',
       backgroundAttachment: 'fixed',
       backgroundSize: 'cover',
-      [theme.breakpoints.up("sm")]:
+      [theme.breakpoints.up("md")]:
       {
         backgroundPosition: 'right',
       },
-      [theme.breakpoints.down('sm')]:
+      [theme.breakpoints.down('md')]:
       {
         backgroundPosition: '80%',
       }
