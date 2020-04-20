@@ -24,6 +24,7 @@ const useStyles = makeStyles((theme)=>(
         backgroundSize: '100% 100%',
     },
     container:{
+        width: '65vw',
         [theme.breakpoints.up('md')]:{
             transform: 'translate(5%,100%)',
         },
@@ -51,7 +52,7 @@ export default function Index(prop) {
                             Jonathan Chai
                         </Typography>
                     </Grid>
-                    <Grid item sm={6} xs={12} className={classes.sumbackground}>
+                    <Grid item sm={8} xs={12} className={classes.sumbackground}>
                         <Typography variant="h3" className={classes.fontstyle}>
                         I'm a video game-playing, book-reading, aesthetic-fanatic techie located in the SF Area.                         </Typography>
                     </Grid>
