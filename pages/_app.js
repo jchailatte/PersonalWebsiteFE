@@ -4,6 +4,7 @@ import { ThemeProvider } from 'styled-components';
 import Head from 'next/head';
 
 import '../css/styles.css';
+import 'react-pdf/dist/Page/AnnotationLayer.css';
 
 const theme = {
 
@@ -20,7 +21,9 @@ export default class App extends NextApp {
     return (
       <ThemeProvider theme={theme}>
         <Head>
-          <link rel="icon" href='/graphics/logo.ico'/>
+            <title>CaeCeus - Jonathan Chai</title>
+            <meta name="description" content="A little personal website for me or as I like to call it, my developer sand-box"></meta>
+            <link rel="icon" href='/graphics/logo.ico'/>
         </Head>
         <Component {...pageProps} />
       </ThemeProvider>

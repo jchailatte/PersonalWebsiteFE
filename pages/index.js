@@ -12,6 +12,7 @@ const useStyles = makeStyles((theme)=>(
         color: 'white',
         textShadow: '0 0 5px black, 0 0 5px black', 
         fontFamily: "'Caveat', cursive",
+        textAlign: 'center'
     },
     titlebackground: {
         backgroundImage: `url(/graphics/stroke.png)`,
@@ -49,12 +50,13 @@ export default function Index(prop) {
                 <Grid container direction="column" className={classes.container}>
                     <Grid item sm={4} xs={12} className={classes.titlebackground}>
                         <Typography variant="h2" className={classes.fontstyle}>
-                            Jonathan Chai
+                             Welcome~
                         </Typography>
                     </Grid>
                     <Grid item sm={8} xs={12} className={classes.sumbackground}>
                         <Typography variant="h3" className={classes.fontstyle}>
-                        I'm a video game-playing, book-reading, aesthetic-fanatic techie located in the SF Area.                         </Typography>
+                        to my little developer sand-box.
+                        </Typography>
                     </Grid>
                 </Grid>
             </Sidebar>
