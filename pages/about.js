@@ -98,8 +98,8 @@ const useStyles = makeStyles((theme) => ({
         paddingTop: '5vh',
         width: '100%',
         justifyContent: 'center',
-        backgroundImage: `url(/graphics/flatstroke.png)`,
-        backgroundSize: '100% 90%',
+        backgroundImage: `url(/graphics/stroke4.png)`,
+        backgroundSize: '100% 100%',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
         backgroundOrigin: 'content-box'
@@ -203,11 +203,17 @@ export default function About(props){
     
     return(
         <Background height={true}>
-            <Sidebar selected={'About'} blur={true}>
+            <Sidebar 
+                selected={'About'} 
+                blur={true}
+                quote={"Potions had a cooldown. What was the best way to drink potions to keep up your endurance during battle? That itself was a type of knowledge."}
+                by={"The King's Avatar"}    
+            >
             <Tabs
             value={tab}
             onChange = {changeTab}
             variant="standard"
+            indicatorColor="primary"
             >
                 <Tab label="Info" tab={0} className={`${classes.fontstyle} ${classes.tabs}`}></Tab>
                 <Tab label="Resume" tab={1} className={`${classes.fontstyle} ${classes.tabs}`}></Tab>

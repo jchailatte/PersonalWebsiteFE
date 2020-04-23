@@ -287,11 +287,9 @@ return (
                 <Divider />
                 <ListItemText >
                     <Typography gutterBottom color={'textSecondary'} className={classes.quote} align={"left"}>
-                    Potions had a cooldown.
-                    What was the best way to drink potions to keep up your endurance during battle?
-                    That itself was a type of knowledge.
+                    {prop.quote}
                     </Typography>
-                    <Typography className={classes.quote} color={'textSecondary'} align={"right"}>-The King's Avatar </Typography>
+                    <Typography className={classes.quote} color={'textSecondary'} align={"right"}>-{prop.by} </Typography>
                 </ListItemText>
             </ListItem>
             <Divider />

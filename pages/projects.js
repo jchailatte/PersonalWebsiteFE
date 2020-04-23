@@ -118,7 +118,12 @@ export default function Projects(prop) {
 
     return(
         <Background height={true}>
-            <Sidebar selected={'Projects'} blur={true}>
+            <Sidebar 
+                selected={'Projects'} 
+                blur={true}
+                quote={"Having confidence doesn't guarentee success, but you will definitely fail if you lack it!"}
+                by={"Long Live Summons!!"}
+            >
                 <Grid container spacing={3}>
                     <Projectsr items={items}></Projectsr>
                 </Grid>
