@@ -165,7 +165,7 @@ export default function About(props){
                     <Grid item md={9} xs={12} >
                         <Typography variant="h4" className={classes.fontstyle}>
                             I'm a video game-playing, book-reading, aesthetic-fanatic techie located in the SF Area. 
-                            Recently graduated from the University of Southern California with a Computer Science B.S. I'm currently looking for a full-time job. 
+                            Recently graduated from the University of Southern California with a Computer Science B.S., I'm currently looking for a full-time job (or freelance job if it's interesting). 
                         </Typography>
                     </Grid>
                     </div>
