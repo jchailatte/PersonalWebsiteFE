@@ -1,14 +1,13 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles} from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import { Document, Page, pdfjs } from 'react-pdf';
+import { Document, Page, View, pdfjs } from 'react-pdf';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
-
 
 import Background from '../components/background';
 import Sidebar from '../components/sidebar';
@@ -70,10 +69,6 @@ const useStyles = makeStyles((theme) => ({
         backgroundSize: '100% 100%',
         textAlign: 'center',
     },
-    listbackground:{
-        backgroundImage: `url(/graphics/flatstroke.png)`,
-        backgroundSize: '100% 100%'
-    },
     sumbackground:{
         backgroundImage: `url(/graphics/flatstroke.png)`,
         backgroundSize: '100% 100%',
@@ -96,18 +91,16 @@ const useStyles = makeStyles((theme) => ({
     restyle:{
         display: 'flex',
         paddingTop: '5vh',
-        width: '100%',
         justifyContent: 'center',
         backgroundImage: `url(/graphics/stroke4.png)`,
         backgroundSize: '100% 100%',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
-        backgroundOrigin: 'content-box'
     },
     border:{
         borderStyle: 'solid',
-        borderWidth: '10px'
-    }
+        borderWidth: '10px',
+    },
 }));
 
 const items=[
@@ -121,7 +114,12 @@ const items=[
 
 export default function About(props){
     const classes = useStyles();
-    const [tab, setTab] = React.useState(0);
+    const [tab, setTab] = React.useState(0);       
+    const [width, setWidth] = useState(0);
+
+     useEffect(()=>{
+        setWidth(window.innerWidth);
+    });
 
     const changeTab = (event, newTab) => {
         setTab(newTab);
@@ -143,9 +141,9 @@ export default function About(props){
     {
         return(
             <React.Fragment>
-            {tab === 0 &&
-            <Grid container spacing={1} >
-                <Grid container item lg={9} alignItems="center">
+            {tab === 0 && 
+            <Grid container spacing={3} style={{paddingTop:'5vh'}}>
+                <Grid container item lg={9} spacing={3} alignItems="center">
                     <Grid item sm={7} xs={12} className={classes.titlebackground} >
                         <Typography variant='h2' className={classes.fontstyle} >
                             Jonathan Chai
@@ -169,7 +167,8 @@ export default function About(props){
                         </Typography>
                     </Grid>
                     </div>
-                    <Grid item xs={12} className={classes.listbackground}>
+                    <Grid item xs={12}></Grid>
+                    <Grid item xs={12} className={classes.sumbackground}>
                         <Typography variant="h5" className={classes.fontstyle}>
                         For those of you that are curious...
                         </Typography>
@@ -178,7 +177,7 @@ export default function About(props){
                         </ul>
                     </Grid>
                 </Grid>
-                <Grid item sm={3} xs={6} space={3} className={classes.itemstyle1}>
+                <Grid item sm={3} xs={12} className={classes.itemstyle1} align="center">
                     <Card className={classes.background}>
                         <img src="/graphics/me.png" className={classes.portrait}></img>
                     </Card>
@@ -190,11 +189,16 @@ export default function About(props){
 
     function Tabpanel2()
     {
+
         return(
             <React.Fragment>
                 {tab === 1 && 
                     <Document file="/doc/res.pdf" className={classes.restyle}>
-                        <Page pageNumber={1} className={classes.border}></Page>
+                        <Page 
+                        pageNumber={1} 
+                        className={classes.border}
+                        width={0.6*width}
+                        ></Page>
                     </Document>
                 }
             </React.Fragment>

@@ -23,6 +23,7 @@ import HomeIcon from '@material-ui/icons/Home';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import EmailIcon from '@material-ui/icons/Email';
+import CopyrightIcon from '@material-ui/icons/Copyright';
 
 const drawerWidth = 250;
 
@@ -289,7 +290,7 @@ return (
                     <Typography gutterBottom color={'textSecondary'} className={classes.quote} align={"left"}>
                     {prop.quote}
                     </Typography>
-                    <Typography className={classes.quote} color={'textSecondary'} align={"right"}>-{prop.by} </Typography>
+                    <Typography className={classes.quote} color={'textSecondary'} align={"right"}> -{prop.by} </Typography>
                 </ListItemText>
             </ListItem>
             <Divider />
@@ -301,7 +302,14 @@ return (
             <Divider/>
             <List>
                 <Itemsr items={footer} depth={0}></Itemsr>
+                <ListItem>
+                    <ListItemIcon><CopyrightIcon fontSize="small"/></ListItemIcon>
+                    <ListItemText>
+                        <Typography color={'textSecondary'}>2020 Jonathan Chai</Typography>
+                    </ListItemText>
+                </ListItem>
             </List>
+
         </div>
         </Drawer>
         <main className ={clsx(classes.content,{[classes.blur]:prop.blur})}>
