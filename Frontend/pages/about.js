@@ -5,6 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
+import Hidden from '@material-ui/core/Hidden';
 import { Document, Page, View, pdfjs } from 'react-pdf';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
@@ -28,16 +29,10 @@ const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.up('md')]:{
             height:'85vh',
         },
-        [theme.breakpoints.down('md')]:
-        {
-            display:'none',
-        },
         [theme.breakpoints.down('xs')]:{
-            display:'flex',
             height: '20vh',
             width: '20vh',
         }
-
     },
     background2: {
         display: 'flex',
@@ -47,18 +42,6 @@ const useStyles = makeStyles((theme) => ({
         backgroundImage:`url(https://i.pinimg.com/originals/02/ab/cf/02abcf44eca37fe51be10527a9ce31d6.jpg)`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-
-        [theme.breakpoints.up('md')]:{
-            display:'none'
-        },
-        [theme.breakpoints.down('md')]:
-        {
-            display:'flex'
-        },
-        [theme.breakpoints.down('xs')]:
-        {
-            display:'none'
-        }
     },
     portrait:{
         height: '85vh'
@@ -77,11 +60,6 @@ const useStyles = makeStyles((theme) => ({
     {
         [theme.breakpoints.down('md')]:{
             order: '-1'
-        }
-    },
-    hide:{
-        [theme.breakpoints.down('sm')] : {
-            display:'none'
         }
     },
     tabs:{
@@ -111,11 +89,10 @@ const items=[
     'Hobbies I have: Light Novels, Anime/Manga, League of Legends, TeamFight Tactics, and recently Valorant' 
 ];
 
-
-export default function About(props){
+function AboutContent(props){
     const classes = useStyles();
     const [tab, setTab] = React.useState(0);       
-    const [width, setWidth] = useState(0);
+    const [width, setWidth] = React.useState(0);
 
      useEffect(()=>{
         setWidth(window.innerWidth);
@@ -134,7 +111,7 @@ export default function About(props){
                         {item}
                     </Typography>
                 </li>
-            )));
+        )));
     };
 
     function TabPanel1()
@@ -142,23 +119,27 @@ export default function About(props){
         return(
             <React.Fragment>
             {tab === 0 && 
-            <Grid container spacing={3} style={{paddingTop:'5vh'}}>
+            <Grid container spacing={3}>
                 <Grid container item lg={9} spacing={3} alignItems="center">
-                    <Grid item sm={7} xs={12} className={classes.titlebackground} >
+                    <Grid item sm={7} xs={12} className={classes.titlebackground}>
                         <Typography variant='h2' className={classes.fontstyle} >
                             Jonathan Chai
                         </Typography>
                     </Grid>
                     <Grid item xs={3}>
+                        <Hidden only={['xs','lg','xl']} implementation="css">
                         <Card className={classes.background2}>
                             <img src="/graphics/me.png" className={classes.portrait}></img>
                         </Card>
+                        </Hidden>
                     </Grid>
                     <div style={{display:'flex'}} className={classes.sumbackground}>
-                    <Grid item xs={2} className={classes.hide}>
+                    <Grid item xs={2}>
+                        <Hidden smDown implementation="css">
                         <Typography variant='h1' className={classes.fontstyle}>
                         Hi!
                         </Typography>
+                        </Hidden>
                     </Grid>
                     <Grid item md={9} xs={12} >
                         <Typography variant="h4" className={classes.fontstyle}>
@@ -178,9 +159,11 @@ export default function About(props){
                     </Grid>
                 </Grid>
                 <Grid item sm={3} xs={12} className={classes.itemstyle1} align="center">
+                    <Hidden only={['sm','md']} implementation="css">
                     <Card className={classes.background}>
                         <img src="/graphics/me.png" className={classes.portrait}></img>
                     </Card>
+                    </Hidden>
                 </Grid>
             </Grid>}
             </React.Fragment>
@@ -206,13 +189,7 @@ export default function About(props){
     }
     
     return(
-        <Background height={true}>
-            <Sidebar 
-                selected={'About'} 
-                blur={true}
-                quote={"Potions had a cooldown. What was the best way to drink potions to keep up your endurance during battle? That itself was a type of knowledge."}
-                by={"The King's Avatar"}    
-            >
+        <React.Fragment>
             <Tabs
             value={tab}
             onChange = {changeTab}
@@ -224,6 +201,21 @@ export default function About(props){
             </Tabs>
                 <TabPanel1></TabPanel1>
                 <Tabpanel2></Tabpanel2>
+        </React.Fragment>
+    )
+}
+
+export default function About(props)
+{
+    return(
+        <Background>
+            <Sidebar 
+                selected={'About'} 
+                blur={true}
+                quote={"Potions had a cooldown. What was the best way to drink potions to keep up your endurance during battle? That itself was a type of knowledge."}
+                by={"The King's Avatar"}    
+            >
+                <AboutContent></AboutContent>
             </Sidebar>
         </Background>
     )

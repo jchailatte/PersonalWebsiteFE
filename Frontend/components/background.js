@@ -9,6 +9,7 @@ const useStyles = makeStyles((theme)=>(
       backgroundRepeat: 'no-repeat',
       backgroundAttachment: 'fixed',
       backgroundSize: 'cover',
+      minHeight:'100vh',
       [theme.breakpoints.up("md")]:
       {
         backgroundPosition: 'right',
@@ -17,17 +18,14 @@ const useStyles = makeStyles((theme)=>(
       {
         backgroundPosition: '80%',
       }
-    },
-    height:{
-        minHeight:'100vh',
-    },
+    }
 }));
 
 export default function Background(props) {
   const classes = useStyles();
   
   return(
-    <div className={clsx(classes.container,{[classes.height]:props.height})}>
+    <div className={classes.container}>
         {props.children}
     </div>
   )

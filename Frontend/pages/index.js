@@ -42,28 +42,33 @@ const useStyles = makeStyles((theme)=>(
     }
 }));
 
-export default function Index(prop) {
+function IndexContent(prop) {
     const classes = useStyles();
-
     return(
-        <Background height={true}>
+        <Grid container direction="column" className={classes.container}>
+            <Grid item sm={4} xs={12} className={classes.titlebackground}>
+                <Typography variant="h2" className={classes.fontstyle}>
+                        Welcome~
+                </Typography>
+            </Grid>
+            <Grid item sm={4} xs={12} className={classes.sumbackground}>
+                <Typography variant="h3" className={classes.fontstyle}>
+                to my little dev sand-box.
+                </Typography>
+            </Grid>
+        </Grid>
+    )
+};
+
+export default function Index(prop) {
+    return(
+        <Background>
             <Sidebar
                 selected={'Home'}
                 quote={"Making a choice doesn't have to have any meaning, but it might have some. We live on Earth, not for any meaning, but to be meaningful."}
                 by={"Jiang Ye"}
             >
-                <Grid container direction="column" className={classes.container}>
-                    <Grid item sm={4} xs={12} className={classes.titlebackground}>
-                        <Typography variant="h2" className={classes.fontstyle}>
-                             Welcome~
-                        </Typography>
-                    </Grid>
-                    <Grid item sm={4} xs={12} className={classes.sumbackground}>
-                        <Typography variant="h3" className={classes.fontstyle}>
-                        to my little dev sand-box.
-                        </Typography>
-                    </Grid>
-                </Grid>
+                <IndexContent></IndexContent>
             </Sidebar>
         </Background>
     )

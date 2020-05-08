@@ -159,7 +159,7 @@ const sbitems =
     {
         text: 'Contact Me',
         icon: <EmailIcon/>,
-        disable: true,
+        href: '/contact',
     },
     {
         text: 'Rooms',
