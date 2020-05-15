@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme)=>(
         textAlign: 'center'
     },
     titlebackground: {
-        backgroundImage: `url(/graphics/stroke.png)`,
+        backgroundImage: `url(/graphics/flatstroke.png)`,
         backgroundRepeat: 'no-repeat',
         backgroundSize: '100% 100%',
         textAlign: 'center',
