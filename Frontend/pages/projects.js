@@ -27,6 +27,15 @@ const useStyles = makeStyles((theme)=>(
 const items=
 [
     {
+        text: 'CS@SC Summer Camps',
+        image: '/graphics/summercamp.png',
+        blurb: 'Capstone Project(legacy from 2016). Added to and fixed(aka deleted) parts of the backend and migrated the WordPress site to another server (which had a firewall yay).',
+        note: 'Note: Can\'t really see much that I did on the site as all the functionalities require an account but I spent way to many hours to not include this project.',
+        button1: 'Go to',
+        button2: '',
+        href1: 'https://summercamp.usc.edu/',
+    },
+    {
         text: 'Twitch Stonks',
         image: '/graphics/twitchstonks.png',
         blurb: 'Many streamers can benefit from increased chat interaction and more reasons to receive bits and cheers. TwitchStonks allows viewers to anticipate heroic plays or embarrassing fails. Play stocks with your favorite streamers with none of the risk.',
@@ -34,6 +43,14 @@ const items=
         button2: 'GitHub',
         href1: 'https://devpost.com/software/twitchstonks',
         href2: 'https://github.com/PeterYangIO/twitchcon2019',
+    },
+    {
+        text: 'I\'m Hungry',
+        image: '/graphics/imhungry.png',
+        blurb: 'Software Engineering class project. A Yelp like application that allows the user to query a type of food and it will return various recipes as well as nearby restaurants within the desired distance.',
+        button1: 'Github',
+        button2: '',
+        href1: 'https://github.com/jchailatte/ImHungry-Agile-',
     },
     {
         text: 'Hitch \'n Ditch',
@@ -54,23 +71,6 @@ const items=
         href1: 'https://devpost.com/software/streamer-trivia',
         github: 'https://github.com/jchailatte/StreamerTrivia',
     },
-    {
-        text: 'I\'m Hungry',
-        image: '/graphics/imhungry.png',
-        blurb: 'Software Engineering class project. A Yelp like application that allows the user to query a type of food and it will return various recipes as well as nearby restaurants within the desired distance.',
-        button1: 'Github',
-        button2: '',
-        href1: 'https://github.com/jchailatte/ImHungry-Agile-',
-    },
-    {
-        text: 'CS@SC Summer Camps',
-        image: '/graphics/summercamp.png',
-        blurb: 'Capstone Project(legacy from 2016). Added to and fixed(aka deleted) parts of the backend and migrated the WordPress site to another server (which had a firewall yay).',
-        note: 'Note: Can\'t really see much that I did on the site as all the functionalities require an account but I spent way to many hours to not include this project.',
-        button1: 'Go to',
-        button2: '',
-        href1: 'https://summercamp.usc.edu/',
-    }
 ];
 
 function ProjectContent(prop) {
