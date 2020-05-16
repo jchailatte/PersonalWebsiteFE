@@ -1,28 +1,28 @@
 import clsx from 'clsx';
-import { makeStyles} from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
+import { makeStyles } from '@material-ui/core/styles';
 import Collapse from '@material-ui/core/Collapse';
+import Divider from '@material-ui/core/Divider';
+import Drawer from '@material-ui/core/Drawer';
+import IconButton from '@material-ui/core/IconButton';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
 
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import CodeIcon from '@material-ui/icons/Code';
-import MeetingRoomIcon from '@material-ui/icons/MeetingRoomRounded';
-import ForumIcon from '@material-ui/icons/Forum';
-import GithubIcon from '@material-ui/icons/GitHub';
-import LinkedInIcon from '@material-ui/icons/LinkedIn';
-import HomeIcon from '@material-ui/icons/Home';
+import CopyrightIcon from '@material-ui/icons/Copyright';
+import EmailIcon from '@material-ui/icons/Email';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import EmailIcon from '@material-ui/icons/Email';
-import CopyrightIcon from '@material-ui/icons/Copyright';
+import ForumIcon from '@material-ui/icons/Forum';
+import GithubIcon from '@material-ui/icons/GitHub';
+import HomeIcon from '@material-ui/icons/Home';
+import LinkedInIcon from '@material-ui/icons/LinkedIn';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import MeetingRoomIcon from '@material-ui/icons/MeetingRoomRounded';
 
 const drawerWidth = 250;
 

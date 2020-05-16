@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { makeStyles} from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
+import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
+import Grid from '@material-ui/core/Grid';
+import Hidden from '@material-ui/core/Hidden';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import Hidden from '@material-ui/core/Hidden';
-import { Document, Page, View, pdfjs } from 'react-pdf';
+import Typography from '@material-ui/core/Typography';
 
+import { Document, Page, View, pdfjs } from 'react-pdf';
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 import Background from '../components/background';
@@ -171,7 +171,6 @@ function AboutContent(props){
 
     function Tabpanel2()
     {
-
         return(
             <React.Fragment>
                 {tab === 1 && 
