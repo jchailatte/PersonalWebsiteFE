@@ -8,9 +8,9 @@ import SendIcon from '@material-ui/icons/Send';
 
 import Background from '../components/background';
 import Sidebar from '../components/sidebar';
+import NetworkRequest from '../utils/NetworkRequest';
 
-const useStyles = makeStyles((theme)=>(
-{
+const useStyles = makeStyles((theme)=>({
     fontstyle:{
         color: 'white',
         textShadow: '0 0 5px black, 0 0 5px black', 
@@ -41,9 +41,8 @@ function ContactContent(prop) {
     });
 
     React.useEffect(()=>{
-        if(errors.valid)
-        {
-            console.log(values)
+        if(errors.valid) {
+            sendForm();
         }
     }, [errors]);
 
@@ -54,32 +53,40 @@ function ContactContent(prop) {
     //I hate form validation -_-
     const errorCheck = (e) => {
         e.preventDefault();
-        console.log("click");
 
-        Object.keys(values).forEach((key, index) =>
-            {
-                if(values[key] == "")
-                {
-                    setErrors(prevState=>{return{...prevState, [key]: true}});
-                }
-                else
-                {
-                    setErrors(prevState=>{return{...prevState, [key]: false}});
-                }
+        Object.keys(values).forEach((key, index) =>{
+            if(values[key] == "") {
+                setErrors(prevState=>{return{...prevState, [key]: true}});
             }
-        );
+            else {
+                setErrors(prevState=>{return{...prevState, [key]: false}});
+            }
+        });
 
-        if(!validEmailRegex.test(values.email))
-        {
+        if(!validEmailRegex.test(values.email)) {
             setErrors(prevState=>{return{...prevState, email: true}});
         }
-        else
-        {
+        else {
             setErrors(prevState=>{return{...prevState, email: false}});
         }
         
         setErrors(prevState=>{return{...prevState, valid: !(prevState.name || prevState.subject || prevState.email || prevState.message )}})
     };
+
+    const sendForm = async() => {
+        const server = "http://localhost:8080/";
+        const response = await NetworkRequest.post(
+            server + "/contact/send",
+            {
+                name: values.name,
+                email: values.email,
+                subject: values.subject,
+                message: values.message
+            }
+        );
+        
+        return response;
+    }
 
     return(
         <Grid container item spacing={3} xs={12} md={7} className={classes.formbackground}>
@@ -105,7 +112,7 @@ function ContactContent(prop) {
                     variant="outlined"
                     required
                     fullWidth
-                    value={values.email || ""}
+                    value={values.email}
                     onChange={handleChange('email')}
                     error={errors.email || false}
                 /> 
@@ -116,7 +123,7 @@ function ContactContent(prop) {
                     variant="outlined"
                     required
                     fullWidth
-                    value={values.subject || ""}
+                    value={values.subject}
                     onChange={handleChange('subject')}
                     error={errors.subject || false}
                 /> 
@@ -129,7 +136,7 @@ function ContactContent(prop) {
                     fullWidth
                     multiline
                     rows={15}
-                    value={values.message || ""}
+                    value={values.message}
                     onChange={handleChange('message')}
                     error={errors.message || false}
                 />

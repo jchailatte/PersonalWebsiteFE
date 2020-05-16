@@ -71,21 +71,20 @@ const useStyles = makeStyles((theme) => ({
         paddingTop: '5vh',
         justifyContent: 'center',
         backgroundImage: `url(/graphics/stroke4.png)`,
-        backgroundSize: '100% 100%',
+        backgroundSize: '110% auto',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
     },
     border:{
         borderStyle: 'solid',
-        borderWidth: '10px',
+        borderWidth: 'thick',
     },
 }));
 
 const items=[
-    'All art on this site was done by me (the background alone took me around 1.5 weeks)',
     'The site was built using: React, Material UI, Next.js',
     'The site is being hosted by: Digital Ocean and running on Nginx and PM2',
-    'The artwork was drawn using: Krita, Intuos Drawing Tablet',
+    'The artwork was drawn(by me) using: Krita, Wacom Intuos Drawing Tablet',
     'Hobbies I have: Light Novels, Anime/Manga, League of Legends, TeamFight Tactics, and recently Valorant' 
 ];
 

@@ -2,7 +2,6 @@ import clsx from 'clsx';
 import { makeStyles} from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import ListItem from '@material-ui/core/ListItem';
@@ -46,20 +45,19 @@ const useStyles = makeStyles((theme) => ({
         background: '#FCFCFC',
     },
     drawerOpen: {
-        [theme.breakpoints.up('sm')]:{
+        [theme.breakpoints.up('sm')]: {
             width: drawerWidth,
             transition: theme.transitions.create('width', {
                 easing: theme.transitions.easing.sharp,
                 duration: theme.transitions.duration.enteringScreen,
             })
         },
-        [theme.breakpoints.down('sm')]:{
+        [theme.breakpoints.down('sm')]: {
             width: theme.spacing(7) +1,
         },
     },
     drawerClose: {
-        transition: theme.transitions.create('width', 
-        {
+        transition: theme.transitions.create('width', {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.leavingScreen,
         }),
@@ -83,8 +81,7 @@ const useStyles = makeStyles((theme) => ({
         paddingLeft: theme.spacing(4),
     },
     opennested:{
-        [theme.breakpoints.down('sm')]:
-        {
+        [theme.breakpoints.down('sm')]: {
             paddingLeft: theme.spacing(2),
         }
     },
@@ -95,14 +92,12 @@ const useStyles = makeStyles((theme) => ({
         display:'none'
     },
     closehide: {
-        [theme.breakpoints.down('sm')]:
-        {
+        [theme.breakpoints.down('sm')]: {
             display: 'none',
         }
     },
     iconbutton:{
-        [theme.breakpoints.down('sm')]:
-        {
+        [theme.breakpoints.down('sm')]: {
             pointerEvents: 'none',
             opacity: '0.4',
         },
@@ -116,7 +111,6 @@ const useStyles = makeStyles((theme) => ({
         whiteSpace:'normal',
         fontWeight: 'bold',
         fontFamily:"'Shadows Into Light', cursive",
-        
         fontSize: '16px',
     },
     logo:{
@@ -257,10 +251,6 @@ function Itemsr({items,depth})
 
 return (
     <div className={classes.root}>
-    <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap" rel="stylesheet"></link>
-    <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap" rel="stylesheet"></link>
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap" rel="stylesheet"></link>
-    <CssBaseline />
         <Drawer
         variant="permanent"
         className={clsx(classes.drawer, {

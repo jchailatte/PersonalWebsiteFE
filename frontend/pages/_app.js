@@ -1,32 +1,43 @@
+import React, {useEffect} from 'react';
 import NextApp from 'next/app';
-import React from 'react';
-import { ThemeProvider } from 'styled-components';
+import PropTypes from 'prop-types';
+import { ThemeProvider } from '@material-ui/core/styles';
 import Head from 'next/head';
+import CssBaseline from '@material-ui/core/CssBaseline';
 
-import '../css/styles.css';
+import theme from '../components/theme';
 import 'react-pdf/dist/Page/AnnotationLayer.css';
 
-const theme = {
+//https://github.com/mui-org/material-ui/blob/master/examples/nextjs/pages/_app.js
 
-}
-export default class App extends NextApp {
-  // remove it here
-  componentDidMount() {
-    const jssStyles = document.querySelector('#jss-server-side')
-    if (jssStyles && jssStyles.parentNode)
-      jssStyles.parentNode.removeChild(jssStyles)
-  }
-  render() {
-    const { Component, pageProps } = this.props
+export default function App (props) {
+    const { Component, pageProps } = props;
+
+    React.useEffect(() => {
+        // Remove the server-side injected CSS.
+        const jssStyles = document.querySelector('#jss-server-side');
+        if (jssStyles) {
+            jssStyles.parentElement.removeChild(jssStyles);
+        }
+    }, []);
+
     return (
-      <ThemeProvider theme={theme}>
-        <Head>
-            <title>CaeCeus - Jonathan Chai</title>
-            <meta name="description" content="A little personal website for me or as I like to call it, my developer sand-box"></meta>
-            <link rel="icon" href='/graphics/logo.ico'/>
-        </Head>
-        <Component {...pageProps} />
-      </ThemeProvider>
+        <React.Fragment>
+            <Head>
+                <title>CaeCeus - Jonathan Chai</title>
+                <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
+                <meta name="description" content="A little personal website for me or as I like to call it, my developer sand-box"></meta>
+                <link rel="icon" href='/graphics/logo.ico'/>
+            </Head>
+            <ThemeProvider theme={theme}>
+                <CssBaseline/>
+                <Component {...pageProps}></Component>
+            </ThemeProvider>
+        </React.Fragment>
     )
-  }
 }
+
+App.propTypes = {
+    Component: PropTypes.elementType.isRequired,
+    pageProps: PropTypes.object.isRequired,
+};
