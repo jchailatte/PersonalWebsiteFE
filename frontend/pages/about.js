@@ -7,7 +7,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 
-import { Document, Page, View, pdfjs } from 'react-pdf';
+import { Document, Page, pdfjs } from 'react-pdf';
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 import Background from '../components/background';
@@ -64,7 +64,9 @@ const useStyles = makeStyles((theme) => ({
     },
     tabs:{
         backgroundImage: `url(/graphics/stroke.png)`,
-        backgroundSize: '100% 100%'
+        backgroundSize: '100% 100%',
+        backgroundRepeat: 'no-repeat'
+        
     },
     restyle:{
         display: 'flex',

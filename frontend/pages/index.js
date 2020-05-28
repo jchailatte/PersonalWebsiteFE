@@ -26,7 +26,9 @@ const useStyles = makeStyles((theme)=>(
         backgroundRepeat: 'no-repeat',
     },
     container:{
-        width: '65vw',
+        width: '20vw',
+        //backgroundImage: `url(/graphics/stroke2.png)`,
+        backgroundSize: '100% 100%',
         [theme.breakpoints.up('md')]:{
             transform: 'translate(5%,100%)',
         },
@@ -46,14 +48,14 @@ function IndexContent(prop) {
     const classes = useStyles();
     return(
         <Grid container direction="column" className={classes.container}>
-            <Grid item sm={4} xs={12} className={classes.titlebackground}>
+            <Grid item xs={12} className={classes.titlebackground}>
                 <Typography variant="h2" className={classes.fontstyle}>
                         Welcome~
                 </Typography>
             </Grid>
-            <Grid item sm={4} xs={12} className={classes.sumbackground}>
+            <Grid item xs={12} className={classes.sumbackground}>
                 <Typography variant="h3" className={classes.fontstyle}>
-                to my little dev sand-box.
+                to my little dev sandbox.
                 </Typography>
             </Grid>
         </Grid>
