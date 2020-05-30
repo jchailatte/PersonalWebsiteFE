@@ -126,15 +126,13 @@ function ProjectContent(prop) {
 export default function Projects(props)
 {
     return(
-        <Background>
-            <Sidebar 
-                selected={'Projects'} 
-                blur={true}
-                quote={"Having confidence doesn't guarentee success, but you will definitely fail if you lack it!"}
-                by={"Long Live Summons!!"}
-            >
-                <ProjectContent></ProjectContent>
-            </Sidebar>
-        </Background>
+        <Sidebar 
+            selected={'Projects'} 
+            blur={true}
+            quote={"Having confidence doesn't guarentee success, but you will definitely fail if you lack it!"}
+            by={"Long Live Summons!!"}
+        >
+            <ProjectContent></ProjectContent>
+        </Sidebar>
     )
 }

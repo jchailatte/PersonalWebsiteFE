@@ -3,6 +3,7 @@ import React, {useState, useEffect, memo} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Checkbox from '@material-ui/core/Checkbox';
+import Fade from '@material-ui/core/Fade';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Grid from '@material-ui/core/Grid';
 import Modal from '@material-ui/core/Modal';
@@ -11,7 +12,6 @@ import Typography from '@material-ui/core/Typography';
 import SendIcon from '@material-ui/icons/Send';
 import NoSSR from '@material-ui/core/NoSsr';
 
-import Background from '../components/background';
 import NetworkRequest from '../utils/NetworkRequest';
 import Sidebar from '../components/sidebar';
 
@@ -39,6 +39,7 @@ const useStyles = makeStyles((theme)=>({
         width: 400,
         backgroundImage: `url(/graphics/splat1.png)`,
         backgroundSize: '100% 100%',
+        backgroundRepeat: 'no-repeat',
         padding: theme.spacing(2, 4, 3),
     },
     responsiveFont: {
@@ -77,7 +78,7 @@ function ContactContent(prop) {
 
     React.useEffect(() => {
         const script = document.createElement("script")
-        script.src = "https://www.google.com/recaptcha/api.js?render=6LeAYvkUAAAAAP1Lq-kAeelmFNjANdEJUvGjolY9"
+        script.src = "https://www.google.com/recaptcha/api.js?render=" + process.env.RECAPTCHA_SITEKEY
         document.body.appendChild(script)
     }, [])
 
@@ -85,7 +86,7 @@ function ContactContent(prop) {
         if(errors.valid) {
             window.grecaptcha.ready(_ => {
             window.grecaptcha
-                .execute("6LeAYvkUAAAAAP1Lq-kAeelmFNjANdEJUvGjolY9", { action: "homepage" })
+                .execute(process.env.RECAPTCHA_SITEKEY, { action: "homepage" })
                 .then(token => {
                     sendForm(token)
                         .then(response => {
@@ -147,7 +148,7 @@ function ContactContent(prop) {
     };
 
     const sendForm = async(token) => {
-        const server = "http://localhost:8080/";
+        const server = process.env.RESTURL;
         const response = await NetworkRequest.post(
             server + "/contact/send", {
                 token: token,
@@ -172,14 +173,16 @@ function ContactContent(prop) {
             className={classes.modal}
             container={() => rootRef.current}
         >
-            <div className={classes.paper}>
-                <img src={valid?"graphics/wcheckmark.png" : "graphics/werror.png"}></img>
-                <h1 className={classes.fontstyle}>{valid ? "Message Successfully Sent" : "Message Failed to Send"}</h1>
-            </div>
+            <Fade in={open}>
+                <div className={classes.paper}>
+                    <img src={valid?"graphics/wcheckmark.png" : "graphics/werror.png"}></img>
+                    <h1 className={classes.fontstyle}>{valid ? "Message Successfully Sent" : "Message Failed to Send"}</h1>
+                </div>
+            </Fade>
         </Modal>
             <Grid container item spacing={3} xs={12} md={7} className={classes.formbackground}>
                 <Grid item xs={12}>
-                    <Typography style={{fontSize: '4vw'}} className={classes.fontstyle}>
+                    <Typography variant='h2' className={classes.fontstyle}>
                         Contact Me!
                     </Typography>
                 </Grid>
@@ -259,18 +262,16 @@ function ContactContent(prop) {
 
 export default function Contact(prop) {
     return(
-        <Background>
-            <Sidebar
-                selected={'Contact Me'}
-                blur={false}
-                quote={"Whether it’s a thousand words or ten thousand arguments, none of them can compare to one's own eyes!"}
-                by={"Records of the Human Emperor"}
-                
-            >
-                <NoSSR>
-                    <ContactContent></ContactContent>
-                </NoSSR>
-            </Sidebar>
-        </Background>
+        <Sidebar
+            selected={'Contact Me'}
+            blur={false}
+            quote={"Whether it’s a thousand words or ten thousand arguments, none of them can compare to one's own eyes!"}
+            by={"Records of the Human Emperor"}
+            
+        >
+            <NoSSR>
+                <ContactContent></ContactContent>
+            </NoSSR>
+        </Sidebar>
     )
 }

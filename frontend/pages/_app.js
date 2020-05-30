@@ -1,11 +1,12 @@
 import React, {useEffect} from 'react';
-import NextApp from 'next/app';
 import PropTypes from 'prop-types';
 import { ThemeProvider } from '@material-ui/core/styles';
 import Head from 'next/head';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
 import theme from '../components/theme';
+import Background from '../components/background';
+
 import 'react-pdf/dist/Page/AnnotationLayer.css';
 
 //https://github.com/mui-org/material-ui/blob/master/examples/nextjs/pages/_app.js
@@ -31,7 +32,9 @@ export default function App (props) {
             </Head>
             <ThemeProvider theme={theme}>
                 <CssBaseline/>
-                <Component {...pageProps}></Component>
+                <Background>
+                    <Component {...pageProps}></Component>
+                </Background>
             </ThemeProvider>
         </React.Fragment>
     )

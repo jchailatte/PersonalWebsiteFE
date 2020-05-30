@@ -3,15 +3,15 @@ import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import Grid from '@material-ui/core/Grid';
 import Hidden from '@material-ui/core/Hidden';
+import PropTypes from 'prop-types';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 
+import Sidebar from '../components/sidebar';
+
 import { Document, Page, pdfjs } from 'react-pdf';
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
-
-import Background from '../components/background';
-import Sidebar from '../components/sidebar';
 
 const useStyles = makeStyles((theme) => ({
     fontstyle:{
@@ -59,6 +59,7 @@ const useStyles = makeStyles((theme) => ({
     itemstyle1:
     {
         [theme.breakpoints.down('md')]:{
+            marginTop: '5vh',
             order: '-1'
         }
     },
@@ -72,10 +73,6 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         paddingTop: '5vh',
         justifyContent: 'center',
-        backgroundImage: `url(/graphics/stroke4.png)`,
-        backgroundSize: '110% auto',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
     },
     border:{
         borderStyle: 'solid',
@@ -92,15 +89,15 @@ const items=[
 
 function AboutContent(props){
     const classes = useStyles();
-    const [tab, setTab] = React.useState(0);       
-    const [width, setWidth] = React.useState(0);
+    const [value, setValue] = useState(0);       
+    const [width, setWidth] = useState(0);
 
-     useEffect(()=>{
+    useEffect(()=>{
         setWidth(window.innerWidth);
-    });
+    },[]);
 
-    const changeTab = (event, newTab) => {
-        setTab(newTab);
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
     };
 
     function Ulr()
@@ -115,11 +112,41 @@ function AboutContent(props){
         )));
     };
 
-    function TabPanel1()
-    {
+    function TabPanel(props) {
+        const { children, value, index, ...other } = props;
+      
+        return (
+            <div
+                role="tabpanel"
+                hidden={value !== index}
+                id={`tabpanel-${index}`}
+                aria-labelledby={`tab-${index}`}
+                {...other}
+            >
+                {value === index && (
+                    <React.Fragment>
+                        {children}
+                    </React.Fragment>
+                )}
+            </div>
+        );
+    }
+
+    TabPanel.propTypes = {
+        children: PropTypes.node,
+        index: PropTypes.any.isRequired,
+        value: PropTypes.any.isRequired,
+    };
+
+    function tabProps(index) {
+        return {
+            id: `tab-${index}`,
+            'aria-controls': `tabpanel-${index}`,
+        };
+    }
+
+    const TabPanel1 = () => {
         return(
-            <React.Fragment>
-            {tab === 0 && 
             <Grid container spacing={3}>
                 <Grid container item lg={9} spacing={3} alignItems="center">
                     <Grid item sm={7} xs={12} className={classes.titlebackground}>
@@ -129,9 +156,9 @@ function AboutContent(props){
                     </Grid>
                     <Grid item xs={3}>
                         <Hidden only={['xs','lg','xl']} implementation="css">
-                        <Card className={classes.background2}>
-                            <img src="/graphics/me.png" className={classes.portrait}></img>
-                        </Card>
+                            <Card className={classes.background2}>
+                                <img src="/graphics/me.png" className={classes.portrait}></img>
+                            </Card>
                         </Hidden>
                     </Grid>
                     <div style={{display:'flex'}} className={classes.sumbackground}>
@@ -166,41 +193,39 @@ function AboutContent(props){
                     </Card>
                     </Hidden>
                 </Grid>
-            </Grid>}
-            </React.Fragment>
+            </Grid>
         );
-    }
+    };
 
-    function Tabpanel2()
-    {
+    const TabPanel2 = () => {
         return(
-            <React.Fragment>
-                {tab === 1 && 
-                    <Document file="/doc/res.pdf" className={classes.restyle}>
-                        <Page 
-                        pageNumber={1} 
-                        className={classes.border}
-                        width={0.6*width}
-                        ></Page>
-                    </Document>
-                }
-            </React.Fragment>
+            <Document file={"/doc/res.pdf"} className={classes.restyle}>
+                <Page 
+                    pageNumber={1} 
+                    className={classes.border}
+                    width={0.6*width}
+                ></Page>
+            </Document>
         );
     }
     
     return(
         <React.Fragment>
             <Tabs
-            value={tab}
-            onChange = {changeTab}
-            variant="standard"
-            indicatorColor="primary"
+                value={value}
+                onChange = {handleChange}
+                variant="standard"
+                indicatorColor="primary"
             >
-                <Tab label="Info" tab={0} className={`${classes.fontstyle} ${classes.tabs}`}></Tab>
-                <Tab label="Resume" tab={1} className={`${classes.fontstyle} ${classes.tabs}`}></Tab>
+                <Tab label="Info" {...tabProps(0)} className={`${classes.fontstyle} ${classes.tabs}`}></Tab>
+                <Tab label="Resume" {...tabProps(1)} className={`${classes.fontstyle} ${classes.tabs}`}></Tab>
             </Tabs>
+            <TabPanel value={value} index={0}>
                 <TabPanel1></TabPanel1>
-                <Tabpanel2></Tabpanel2>
+            </TabPanel>
+            <TabPanel value={value} index={1}>
+                <TabPanel2></TabPanel2>
+            </TabPanel>
         </React.Fragment>
     )
 }
@@ -208,16 +233,14 @@ function AboutContent(props){
 export default function About(props)
 {
     return(
-        <Background>
-            <Sidebar 
-                selected={'About'} 
-                blur={true}
-                quote={"Potions had a cooldown. What was the best way to drink potions to keep up your endurance during battle? That itself was a type of knowledge."}
-                by={"The King's Avatar"}    
-            >
-                <AboutContent></AboutContent>
-            </Sidebar>
-        </Background>
+        <Sidebar 
+            selected={'About'} 
+            blur={true}
+            quote={"Potions had a cooldown. What was the best way to drink potions to keep up your endurance during battle? That itself was a type of knowledge."}
+            by={"The King's Avatar"}    
+        >
+            <AboutContent></AboutContent>
+        </Sidebar>
     )
 }
 

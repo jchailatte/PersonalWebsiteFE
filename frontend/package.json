@@ -1,33 +1,32 @@
 {
-    "name": "ceus_ws",
-    "version": "1.0.0",
-    "description": "",
-    "main": "index.js",
-    "scripts": {
-      "dev": "next",
-      "build": "next build",
-      "start": "next start"
-    },
-    "repository": {
-      "type": "git",
-      "url": "git+https://github.com/jchailatte/ceus_ws.git"
-    },
-    "keywords": [],
-    "author": "Me",
-    "license": "ISC",
-    "bugs": {
-      "url": "https://github.com/jchailatte/ceus_ws/issues"
-    },
-    "homepage": "https://github.com/jchailatte/ceus_ws#readme",
-    "dependencies": {
-      "@material-ui/core": "^4.9.14",
-      "@material-ui/icons": "^4.9.1",
-      "babel-plugin-styled-components": "^1.10.7",
-      "next": "^9.3.6",
-      "react": "^16.13.1",
-      "react-dom": "^16.13.1",
-      "react-pdf": "^4.1.0"
-    },
-    "devDependencies": {}
-  }
-  
+  "name": "ceus_ws",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jchailatte/ceus_ws.git"
+  },
+  "keywords": [],
+  "author": "Me",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jchailatte/ceus_ws/issues"
+  },
+  "homepage": "https://github.com/jchailatte/ceus_ws#readme",
+  "dependencies": {
+    "@material-ui/core": "^4.10.0",
+    "@material-ui/icons": "^4.9.1",
+    "babel-plugin-styled-components": "^1.10.7",
+    "next": "^9.3.6",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-pdf": "^4.1.0"
+  },
+  "devDependencies": {}
+}

@@ -156,13 +156,13 @@ const sbitems =
         href: '/contact',
     },
     {
-        text: 'Rooms',
-        icon: <MeetingRoomIcon/>,
+        text: 'Blog',
+        icon: <ForumIcon/>,
         disable: true
     },
     {
-        text: 'Thoughts',
-        icon: <ForumIcon/>,
+        text: 'Rooms',
+        icon: <MeetingRoomIcon/>,
         disable: true
     },
     // {
@@ -299,7 +299,6 @@ return (
                     </ListItemText>
                 </ListItem>
             </List>
-
         </div>
         </Drawer>
         <main className ={clsx(classes.content,{[classes.blur]:prop.blur})}>
