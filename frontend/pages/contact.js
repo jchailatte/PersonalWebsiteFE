@@ -42,10 +42,6 @@ const useStyles = makeStyles((theme)=>({
         backgroundRepeat: 'no-repeat',
         padding: theme.spacing(2, 4, 3),
     },
-    responsiveFont: {
-        //do responsive font here
-        //maybe shift fontStyle into theme
-    }
 }));
 
 function ContactContent(prop) {
@@ -237,6 +233,7 @@ function ContactContent(prop) {
                     <Button 
                         type="submit"
                         variant="contained" 
+                        color = "primary"
                         size="large" 
                         endIcon={<SendIcon/>} 
                         onClick={errorCheck}
@@ -267,7 +264,6 @@ export default function Contact(prop) {
             blur={false}
             quote={"Whether it’s a thousand words or ten thousand arguments, none of them can compare to one's own eyes!"}
             by={"Records of the Human Emperor"}
-            
         >
             <NoSSR>
                 <ContactContent></ContactContent>

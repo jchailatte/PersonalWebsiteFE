@@ -4,10 +4,10 @@ import { red } from '@material-ui/core/colors';
 const theme = responsiveFontSizes(createMuiTheme({
     palette: {
         primary: {
-            main: '#556cd6',
+            main: '#000000',
         },
         secondary: {
-            main: '#19857b',
+            main: '#000000',
         },
         error: {
             main: red.A400,

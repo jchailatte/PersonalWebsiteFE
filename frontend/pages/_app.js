@@ -6,6 +6,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 
 import theme from '../components/theme';
 import Background from '../components/background';
+import Canvas from '../components/canvas';
 
 import 'react-pdf/dist/Page/AnnotationLayer.css';
 
@@ -32,6 +33,7 @@ export default function App (props) {
             </Head>
             <ThemeProvider theme={theme}>
                 <CssBaseline/>
+                <Canvas></Canvas>
                 <Background>
                     <Component {...pageProps}></Component>
                 </Background>

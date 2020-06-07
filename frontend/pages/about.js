@@ -100,16 +100,10 @@ function AboutContent(props){
         setValue(newValue);
     };
 
-    function Ulr()
-    {
-        return(
-            items.map((item,index)=>(
-                <li key={item} className={classes.fontstyle}>
-                    <Typography variant="h6" className={classes.fontstyle}>
-                        {item}
-                    </Typography>
-                </li>
-        )));
+    TabPanel.propTypes = {
+        children: PropTypes.node,
+        index: PropTypes.any.isRequired,
+        value: PropTypes.any.isRequired,
     };
 
     function TabPanel(props) {
@@ -131,12 +125,6 @@ function AboutContent(props){
             </div>
         );
     }
-
-    TabPanel.propTypes = {
-        children: PropTypes.node,
-        index: PropTypes.any.isRequired,
-        value: PropTypes.any.isRequired,
-    };
 
     function tabProps(index) {
         return {
@@ -209,6 +197,18 @@ function AboutContent(props){
         );
     }
     
+    function Ulr()
+    {
+        return(
+            items.map((item,index)=>(
+                <li key={item} className={classes.fontstyle}>
+                    <Typography variant="h6" className={classes.fontstyle}>
+                        {item}
+                    </Typography>
+                </li>
+        )));
+    };
+
     return(
         <React.Fragment>
             <Tabs

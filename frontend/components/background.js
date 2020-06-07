@@ -20,11 +20,11 @@ const useStyles = makeStyles((theme)=>(
 }));
 
 export default function Background(props) {
-  const classes = useStyles();
+    const classes = useStyles();
   
-  return(
-    <div className={classes.container}>
-        {props.children}
-    </div>
-  )
+    return(
+        <div className={classes.container} id="background">
+            {props.children}
+        </div>
+    )
 }

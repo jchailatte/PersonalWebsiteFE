@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Collapse from '@material-ui/core/Collapse';
 import Divider from '@material-ui/core/Divider';
@@ -200,7 +201,7 @@ const footer =
     }
 ];
 
-export default function MiniDrawer(prop) {
+export default function Sidebar(prop) {
     const classes = useStyles();
     const [open, setOpen] = React.useState(true);
     const [openCollapse, setOpenCollapse] = React.useState(false);
@@ -306,4 +307,11 @@ return (
         </main>
     </div>
     );
+}
+
+Sidebar.propTypes = {
+    selected: PropTypes.string.isRequired,
+    blur: PropTypes.bool,
+    quote: PropTypes.string.isRequired,
+    by: PropTypes.string.isRequired
 }
