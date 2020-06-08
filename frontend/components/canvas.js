@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import clsx from 'clsx';
 import { makeStyles} from '@material-ui/core/styles';
-import { CssBaseline } from '@material-ui/core';
+
+import Brushstroke from './brushengine/brushstroke';
 
 const useStyles = makeStyles((theme)=>(
 {
@@ -16,18 +17,13 @@ export default function canvas(props) {
     const [height, setHeight] = useState(0);
     const [width, setWidth] = useState(0);
 
-    console.log(props.children);
-
     useEffect(()=>{
         setWidth(window.innerWidth);
         setHeight(window.innerHeight);
     },[]);
   
     return(
-        <React.Fragment>
         <canvas height={height} width={width} className={classes.elcanvas} id="blackout">
         </canvas>
-        </React.Fragment>
-
     )
 }

@@ -1,4 +1,4 @@
-import Brush from "./brush";
+import Brush from './brush'
 
 /**
  * Modified from 
@@ -15,7 +15,7 @@ import Brush from "./brush";
         root.Brushstroke = factory();
     }
 }(this, function () {
-    
+
     /**
      * Curve calc function for canvas 2.3.4 - (c) Epistemex 2013-2016 - www.epistemex.com - MIT License
      */
@@ -67,7 +67,7 @@ import Brush from "./brush";
 
         for (; i < numOfSeg; i++) {
 
-            const st = i / numOfSeg,
+            var st = i / numOfSeg,
                 st2 = st * st,
                 st3 = st2 * st,
                 st23 = st3 * 2,
@@ -130,14 +130,13 @@ import Brush from "./brush";
     }
 
 
-   
     /********************
      * Brushstroke utils
      ********************/
 
     // Type of elements, most from anime.js
 
-    const is = {
+    var is = {
         obj: function(a) { return Object.prototype.toString.call(a).indexOf('Object') > -1 },
         num: function(a) { return typeof a === 'number' },
         str: function(a) { return typeof a === 'string' },
@@ -147,22 +146,22 @@ import Brush from "./brush";
 
     // Functions
 
-    const callFunction = (fn, context, params) => {
+    function callFunction(fn, context, params) {
         if (is.fnc(fn)) fn.call(context, params);
     }
 
     // Objects
 
-    const extendSingle = (target, source) => {
-        for (const key in source)
+    function extendSingle(target, source) {
+        for (var key in source)
             target[key] = source[key];
         return target;
     }
 
-    function extend (target, source) {
+    function extend(target, source) {
         if (!target) target = {};
-        for (const argument of arguments)
-            extendSingle(target, argument);
+        for (var i = 1; i < arguments.length; i++)
+            extendSingle(target, arguments[i]);
         return target;
     }
 
@@ -222,10 +221,6 @@ import Brush from "./brush";
             overlap: 10,
             tension: 0.5,
             reduceOverflow: 20,
-            image: undefined,
-            repeat: 'no-repeat',
-            stretch: false,
-            centered: false,
             queue: false
         };
 
@@ -235,7 +230,7 @@ import Brush from "./brush";
     Brushstroke.prototype = {
 
         init: function (options) {
-            const o = extend(this.defaults, options);
+            var o = extend(this.defaults, options);
 
             var d = deferred();
             this.promise = d.promise;
@@ -243,7 +238,7 @@ import Brush from "./brush";
         },
 
         run: function (options) {
-            const that = this;
+            var that = this;
 
             function start() {
                 if (options.render) {
@@ -262,9 +257,9 @@ import Brush from "./brush";
         },
 
         draw: function (options) {
-            const that = this;
-            const o = extend({}, this.defaults, options);
-            const _draw = function () {
+            var that = this;
+            var o = extend({}, this.defaults, options);
+            var _draw = function () {
                 var d = deferred();
                 that.run(extend(o, {d: d}));
                 return d.promise;
@@ -380,11 +375,7 @@ import Brush from "./brush";
                 if (!is.und(o.startX)) x = o.startX;
                 if (!is.und(o.startY)) y = o.startY;
 
-                
-
-
-                
-                const brush = new Brush(x, y, o.pattern || o.color, o.size, o.inkAmount, o.angle, o.dripping, o.splashing);
+                var brush = new Brush(x, y, o.pattern || o.color, o.size, o.inkAmount, o.angle, o.dripping, o.splashing);
                 brush.startStroke(x, y);
                 callFunction(o.begin);
 
@@ -453,17 +444,17 @@ import Brush from "./brush";
                 callFunction(this.animations.basic, this, extend(o, {direction: 'left'}));
             },
             'basic': function(o) {
-                const pos = this.setPos(o);
-                const brushstrokes = Math.ceil(((pos.vertical ? o.height : o.width) + (o.size / 2) - (o.padding * 2)) / (o.size - o.overlap));
-                const angle = pos.vertical ? Math.PI * 0.5 : 0;
-                const duration = o.duration / brushstrokes;
-                const frames = o.frames / brushstrokes;
-                const points = [];
-                const alt = true;
-                const overflow = o.reduceOverflow;
-                let opts, first, last;
+                var pos = this.setPos(o);
+                var brushstrokes = Math.ceil(((pos.vertical ? o.height : o.width) + (o.size / 2) - (o.padding * 2)) / (o.size - o.overlap));
+                var angle = pos.vertical ? Math.PI * 0.5 : 0;
+                var duration = o.duration / brushstrokes;
+                var frames = o.frames / brushstrokes;
+                var points = [];
+                var alt = true;
+                var overflow = o.reduceOverflow;
+                var opts, first, last;
 
-                const fixOverflow = (axis) => {
+                function fixOverflow(axis) {
                     if (i === 0) pos[axis] = pos[axis] - overflow;
                     if (i === 1) pos[axis] = pos[axis] + overflow;
                     if (i === brushstrokes - 1) pos[axis] = alt ? pos[axis] + overflow : pos[axis] - overflow;
