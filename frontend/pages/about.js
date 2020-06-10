@@ -8,8 +8,6 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 
-import Sidebar from '../components/sidebar';
-
 import { Document, Page, pdfjs } from 'react-pdf';
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
@@ -87,7 +85,17 @@ const items=[
     'Hobbies I have: Light Novels, Anime/Manga, League of Legends, TeamFight Tactics, and recently Valorant' 
 ];
 
-function AboutContent(props){
+export async function getStaticProps(context){
+    return{
+        props:{
+            selected: 'About',
+            quote: "Potions had a cooldown. What was the best way to drink potions to keep up your endurance during battle? That itself was a type of knowledge.",
+            by: "The King's Avatar",
+        }
+    }
+}
+
+export default function About(props){
     const classes = useStyles();
     const [value, setValue] = useState(0);       
     const [width, setWidth] = useState(0);
@@ -229,23 +237,3 @@ function AboutContent(props){
         </React.Fragment>
     )
 }
-
-export default function About(props)
-{
-    return(
-        <Sidebar 
-            selected={'About'} 
-            blur={true}
-            quote={"Potions had a cooldown. What was the best way to drink potions to keep up your endurance during battle? That itself was a type of knowledge."}
-            by={"The King's Avatar"}    
-        >
-            <AboutContent></AboutContent>
-        </Sidebar>
-    )
-}
-
-
-
-
-
-

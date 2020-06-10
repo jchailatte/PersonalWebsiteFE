@@ -1,12 +1,12 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useState, useEffect} from 'react';
 import { makeStyles, useTheme} from '@material-ui/core/styles';
-import Fade from '@material-ui/core/Fade';
 import Grid from '@material-ui/core/Grid';
 import Grow from '@material-ui/core/Grow';
 import Typography from '@material-ui/core/Typography';
 
-import Sidebar from '../components/sidebar';
 import Brushstroke from '../components/brushengine/brushstroke';
+
+import { useResize } from '../utils/hooks/useResize';
 
 const useStyles = makeStyles((theme)=>(
 {
@@ -40,81 +40,68 @@ const useStyles = makeStyles((theme)=>(
 
 }));
 
-function IndexContent(props) {
+export async function getStaticProps(context){
+    return{
+        props:{
+            selected: 'Home',
+            quote: "Making a choice doesn't have to have any meaning, but it might have some. We live on Earth, not for any meaning, but to be meaningful.",
+            by: 'Jiang Ye'
+        }
+    }
+}
+
+export default function Index(props) {
     const classes = useStyles();
 
-    const [width, setWidth] = useState(0);
-    const [height, setHeight] = useState(0);
-    const [paint, setPaint] = useState(false);
+    const dimensions = useResize('container');
+    const [display1, setDisplay1] = useState(false);
+    const [display2, setDisplay2] = useState(false);
     const [bs, setBs] = useState(undefined);
 
     useEffect(()=>{
-        setWidth(document.getElementById('container').offsetWidth);
-        setHeight(document.getElementById('container').offsetHeight);
         setBs(new Brushstroke({
             canvas: document.getElementById('index_canvas'),
             ctx: document.getElementById('index_canvas').getContext('2d'),
             inkAmount: 3,
             size: 45,
             lifting: true,
-            queue: false,
+            queue: true,
         }));
     },[]);
 
-    //issue is probably somehwere below here -.-
-
     useEffect(()=>{
-        window.addEventListener('resize', handleResize);
-    });
-
-    const handleResize = () => {
-        //console.log('resized to: ', window.innerWidth, 'x', window.innerHeight);
-        setHeight(document.getElementById('container').offsetHeight);
-        setWidth(document.getElementById('container').offsetWidth);
-    }
-
-    useEffect(()=>{
-        console.log("hit");
         if(bs != undefined){
-            bs.draw({duration:2,width:width, height: height})
+            bs.draw({duration:2, width:dimensions.width, height:dimensions.height})
 
             setTimeout(()=>{            
-                setPaint(true);
+                setDisplay1(true);
+            }, 1000);
+
+            setTimeout(()=>{            
+                setDisplay2(true);
             }, 2000);
         }
-    },[width]);
+    },[dimensions]);
 
     return(
         <Grid container direction="column" className={classes.container} id="container">
-            <canvas id='index_canvas' height={height} width={width} className={classes.canvas}></canvas>
-                <div className={classes.index}>
-                    <Grid item xs={12}>
-                        <Grow in={paint}>
-                            <Typography variant="h2" className={`${classes.fontstyle} ${classes.titlebackground}`}>
-                                Welcome~
-                            </Typography>
-                        </Grow>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <Grow in={paint}>
-                            <Typography variant="h3" className={`${classes.fontstyle} ${classes.sumbackground}`}>
+            <canvas id='index_canvas' height={dimensions.height} width={dimensions.width} className={classes.canvas}></canvas>
+            <div className={classes.index}>
+                <Grid item xs={12}>
+                    <Grow in={display1}>
+                        <Typography variant="h2" className={classes.fontstyle}>
+                            Welcome~
+                        </Typography>
+                    </Grow>
+                </Grid>
+                <Grid item xs={12}>
+                    <Grow in={display2}>
+                        <Typography variant="h3" className={classes.fontstyle}>
                             to my website.
-                            </Typography>
-                        </Grow>
-                    </Grid>
-                </div>
+                        </Typography>
+                    </Grow>
+                </Grid>
+            </div>
         </Grid>
     )
 };
-
-export default function Index(props) {
-    return(
-        <Sidebar
-            selected={'Home'}
-            quote={"Making a choice doesn't have to have any meaning, but it might have some. We live on Earth, not for any meaning, but to be meaningful."}
-            by={"Jiang Ye"}
-        >
-            <IndexContent></IndexContent>
-        </Sidebar>
-    )
-}

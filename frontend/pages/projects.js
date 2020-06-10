@@ -9,8 +9,6 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 
-import Sidebar from '../components/sidebar';
-
 const useStyles = makeStyles((theme)=>(
 {
     media:{
@@ -72,7 +70,18 @@ const items=
     },
 ];
 
-function ProjectContent(prop) {
+export async function getStaticProps(context){
+    return{
+        props:{
+            selected: 'Projects',
+            blur: true,
+            quote: "Having confidence doesn't guarentee success, but you will definitely fail if you lack it!",
+            by: "Long Live Summons!!"
+        }
+    }
+}
+
+export default function Project(prop) {
     const classes = useStyles();
 
     function Projectsr()
@@ -121,17 +130,3 @@ function ProjectContent(prop) {
         </Grid>
     )
 };
-
-export default function Projects(props)
-{
-    return(
-        <Sidebar 
-            selected={'Projects'} 
-            blur={true}
-            quote={"Having confidence doesn't guarentee success, but you will definitely fail if you lack it!"}
-            by={"Long Live Summons!!"}
-        >
-            <ProjectContent></ProjectContent>
-        </Sidebar>
-    )
-}

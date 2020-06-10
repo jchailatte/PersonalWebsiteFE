@@ -1,4 +1,4 @@
-import React, {useState, useEffect, memo} from 'react';
+import React, {useState, useEffect} from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
@@ -12,8 +12,9 @@ import Typography from '@material-ui/core/Typography';
 import SendIcon from '@material-ui/icons/Send';
 import NoSSR from '@material-ui/core/NoSsr';
 
+import Brushstroke from '../components/brushengine/brushstroke';
 import NetworkRequest from '../utils/NetworkRequest';
-import Sidebar from '../components/sidebar';
+import { useResize } from '../utils/hooks/useResize';
 
 const useStyles = makeStyles((theme)=>({
     fontstyle:{
@@ -24,9 +25,6 @@ const useStyles = makeStyles((theme)=>({
     },
     formbackground:{
         minHeight: '60vh',
-        backgroundImage: `url(/graphics/whitestrokes3.png)`,
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: '100% 100%',
     },
     modal: {
         display: 'flex',
@@ -42,43 +40,63 @@ const useStyles = makeStyles((theme)=>({
         backgroundRepeat: 'no-repeat',
         padding: theme.spacing(2, 4, 3),
     },
+    canvas:{
+        position: 'absolute'
+    },
+    index: {
+        zIndex:1,
+    },
 }));
 
-function ContactContent(prop) {
+export async function getStaticProps(context){
+    return{
+        props:{
+            selected: 'Contact Me',
+            blur: false,
+            quote: "Whether it’s a thousand words or ten thousand arguments, none of them can compare to one's own eyes!",
+            by:"Records of the Human Emperor",
+        }
+    }
+}
+
+export default function Contact(prop) {
     const classes = useStyles();
     const rootRef = React.useRef(null);
     const validEmailRegex = RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
-
     const initialState ={
         name: "",
         email:"",
         subject: "",
         message:"",
         copy: false
-    }
-
-    const [values, setValues] = React.useState({
-        name: "",
-        email:"",
-        subject: "",
-        message:"",
-        copy: false
-    });
-
-    const [errors, setErrors] = React.useState({
-        valid: false
-    });
-
+    };
+    const [values, setValues] = React.useState(initialState);
+    const [errors, setErrors] = React.useState({valid: false});
     const [open, setOpen] = React.useState(false);
     const [valid, setValid] = React.useState(true);
 
-    React.useEffect(() => {
+    //Brush values
+    const[bs, setBs] = useState(undefined);
+    const dimensions =  useResize('container');
+
+    useEffect(() => {
         const script = document.createElement("script")
         script.src = "https://www.google.com/recaptcha/api.js?render=" + process.env.RECAPTCHA_SITEKEY
-        document.body.appendChild(script)
-    }, [])
+        document.body.appendChild(script);
 
-    React.useEffect(()=>{
+        setBs(new Brushstroke({
+            canvas: document.getElementById('contact_canvas'),
+            ctx: document.getElementById('contact_canvas').getContext('2d'),
+            inkAmount: 15,
+            size: 70, 
+            color: '#FFFFFF',
+            lifting: true,
+            queue: true
+        }));
+
+    }, [])    
+
+    useEffect(()=>{
         if(errors.valid) {
             window.grecaptcha.ready(_ => {
             window.grecaptcha
@@ -104,6 +122,12 @@ function ContactContent(prop) {
             })
         }
     }, [errors]);
+
+    useEffect(()=>{
+        if(bs != undefined){
+            bs.draw({duration:2, width:dimensions.width, height: dimensions.height});
+        }
+    },[dimensions]);
 
     const handleChange = (prop) => (event) => {
         setValues({ ...values, [prop]: event.target.value });
@@ -176,13 +200,15 @@ function ContactContent(prop) {
                 </div>
             </Fade>
         </Modal>
-            <Grid container item spacing={3} xs={12} md={7} className={classes.formbackground}>
-                <Grid item xs={12}>
-                    <Typography variant='h2' className={classes.fontstyle}>
-                        Contact Me!
-                    </Typography>
-                </Grid>
-                <Grid item xs={12}>
+        <Grid container item spacing={3} xs={12} md={7} className={classes.formbackground} id="container">
+            <canvas id='contact_canvas' height={dimensions.height} width={dimensions.width} className={classes.canvas}></canvas>
+            <Grid item xs={12} className={classes.index}>
+                <Typography variant='h2' className={classes.fontstyle}>
+                    Contact Me!
+                </Typography>
+            </Grid>
+            <Grid item xs={12}>
+                <NoSSR>
                     <TextField
                         label="Name" 
                         variant="outlined" 
@@ -193,81 +219,67 @@ function ContactContent(prop) {
                         error={errors.name || false}
                         autoFocus={true}
                     />
-                </Grid>
-                <Grid item xs={12}>
-                    <TextField
-                        label="Email"
-                        variant="outlined"
-                        required
-                        fullWidth
-                        value={values.email}
-                        onChange={handleChange('email')}
-                        error={errors.email || false}
-                    /> 
-                </Grid>
-                <Grid item xs={12}>
-                    <TextField
-                        label="Subject"
-                        variant="outlined"
-                        required
-                        fullWidth
-                        value={values.subject}
-                        onChange={handleChange('subject')}
-                        error={errors.subject || false}
-                    /> 
-                </Grid>
-                <Grid item xs={12}>
-                    <TextField
-                        label="Message"
-                        variant="outlined"
-                        required
-                        fullWidth
-                        multiline
-                        rows={15}
-                        value={values.message}
-                        onChange={handleChange('message')}
-                        error={errors.message || false}
-                    />
-                </Grid>
-                <Grid item xs={12} sm={4}>
-                    <Button 
-                        type="submit"
-                        variant="contained" 
-                        color = "primary"
-                        size="large" 
-                        endIcon={<SendIcon/>} 
-                        onClick={errorCheck}
-                    >
-                        Submit
-                    </Button>
-                </Grid>
-                <Grid item xs={12} sm={8} >
+                </NoSSR>
+            </Grid>
+            <Grid item xs={12}>
+                <TextField
+                    label="Email"
+                    variant="outlined"
+                    required
+                    fullWidth
+                    value={values.email}
+                    onChange={handleChange('email')}
+                    error={errors.email || false}
+                /> 
+            </Grid>
+            <Grid item xs={12}>
+                <TextField
+                    label="Subject"
+                    variant="outlined"
+                    required
+                    fullWidth
+                    value={values.subject}
+                    onChange={handleChange('subject')}
+                    error={errors.subject || false}
+                /> 
+            </Grid>
+            <Grid item xs={12}>
+                <TextField
+                    label="Message"
+                    variant="outlined"
+                    required
+                    fullWidth
+                    multiline
+                    rows={15}
+                    value={values.message}
+                    onChange={handleChange('message')}
+                    error={errors.message || false}
+                />
+            </Grid>
+            <Grid item xs={12} sm={4}>
+                <Button 
+                    type="submit"
+                    variant="contained" 
+                    color = "primary"
+                    size="large" 
+                    endIcon={<SendIcon/>} 
+                    onClick={errorCheck}
+                >
+                    Submit
+                </Button>
+            </Grid>
+            <Grid item xs={12} sm={8} className={classes.index}>
                     <FormControlLabel
                         control={<Checkbox checked={values.copy} onChange={handleCheck} name="copy"/>}
                         label="Receive a copy"
                     />
                 </Grid>
-            </Grid>
-            <div
-                className="g-recaptcha"
-                data-sitekey="6LeAYvkUAAAAAP1Lq-kAeelmFNjANdEJUvGjolY9"
-                data-size="invisible"
-            ></div>
+        </Grid>
+        <div
+            className="g-recaptcha"
+            data-sitekey="6LeAYvkUAAAAAP1Lq-kAeelmFNjANdEJUvGjolY9"
+            data-size="invisible"
+        ></div>
         </React.Fragment>
-    )
-}
-
-export default function Contact(prop) {
-    return(
-        <Sidebar
-            selected={'Contact Me'}
-            blur={false}
-            quote={"Whether it’s a thousand words or ten thousand arguments, none of them can compare to one's own eyes!"}
-            by={"Records of the Human Emperor"}
-        >
-            <NoSSR>
-                <ContactContent></ContactContent>
-            </NoSSR>
-        </Sidebar>
     )
 }

@@ -2,7 +2,6 @@ import React, {useState, useEffect, useRef} from 'react';
 import { makeStyles, useTheme} from '@material-ui/core/styles';
 import NoSSR from '@material-ui/core/NoSsr';
 
-import Sidebar from '../components/sidebar';
 import Brushstroke from '../components/brushengine/brushstroke';
   
 const useStyles = makeStyles((theme)=>(

@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import { ThemeProvider } from '@material-ui/core/styles';
 import Head from 'next/head';
@@ -7,6 +7,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import theme from '../components/theme';
 import Background from '../components/background';
 import Canvas from '../components/canvas';
+import Sidebar from '../components/sidebar';
 
 import 'react-pdf/dist/Page/AnnotationLayer.css';
 
@@ -28,14 +29,21 @@ export default function App (props) {
             <Head>
                 <title>CaeCeus - Jonathan Chai</title>
                 <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
-                <meta name="description" content="A little personal website for me or as I like to call it, my developer sand-box"></meta>
+                <meta name="description" content="A little personal website for me or as I like to call it, my developer sandbox"></meta>
                 <link rel="icon" href='/graphics/logo.ico'/>
             </Head>
             <ThemeProvider theme={theme}>
                 <CssBaseline/>
                 <Canvas></Canvas>
                 <Background>
-                    <Component {...pageProps}></Component>
+                    <Sidebar
+                        selected={pageProps.selected}
+                        quote={pageProps.quote}
+                        by={pageProps.by}
+                        blur={pageProps.blur}
+                    >
+                        <Component {...pageProps}></Component>
+                    </Sidebar>
                 </Background>
             </ThemeProvider>
         </React.Fragment>
