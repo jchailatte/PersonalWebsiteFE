@@ -1,8 +1,0 @@
-MUI
-
-
-
-
--testing
-GSAP
-react-pdf

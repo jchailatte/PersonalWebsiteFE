@@ -1,19 +1,17 @@
-finalize color palette
-    maybe make a theme and apply it
-
-set up backend at some point 
-    shift the quote picking to the backend
-
-maybe download fonts
-
 make the other pages lol
 
 maybe make a janky under construction page
-    like 'What r u doing here' 
+    like 'What r u doing here'
 
-potentially add transitions to the pages 
+make error page
 
-make fonts responsive 
+potentially add transitions to the pages  
+
+make a nice fancy button :D <- ha
 
 https://gist.github.com/Kocisov/2a9567eb51b83dfef48efce02ef3ab06?fbclid=IwAR2bxrp91Prd60CaWyp0Tgla4i4WT2m6oP-O0KcHYJuBJZo2d-_Y3n0h3Ec
 
+also resize upon clicking the sidebar wheeee
+	this might be able to be done by attaching the Open bool to useResize's useEffect
+
+also do the brushstroke for the modal in the contact page
