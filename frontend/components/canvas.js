@@ -1,29 +1,45 @@
-import { useState, useEffect } from 'react';
-import clsx from 'clsx';
+import { useEffect } from 'react';
 import { makeStyles} from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
 
-import Brushstroke from './brushengine/brushstroke';
+import { useResize } from '../utils/hooks/useResize';
 
 const useStyles = makeStyles((theme)=>(
 {
-    elcanvas: {
-        position: 'fixed'
+    canvas: {
+        position: 'absolute',
     }
 }));
 
-export default function canvas(props) {
+export default function Canvas(props) {
     const classes = useStyles();
 
-    const [height, setHeight] = useState(0);
-    const [width, setWidth] = useState(0);
-
+    const dimensions = useResize(props.container);
+    
     useEffect(()=>{
-        setWidth(window.innerWidth);
-        setHeight(window.innerHeight);
-    },[]);
-  
+        if(props.bs != undefined){
+            props.bs.draw({
+                canvas: document.getElementById(props.id),
+                ctx: document.getElementById(props.id).getContext('2d'),
+                width:dimensions.width, 
+                height:dimensions.height
+            })
+        }
+    },[dimensions]);
+
     return(
-        <canvas height={height} width={width} className={classes.elcanvas} id="blackout">
+        <canvas 
+            height={dimensions.height} 
+            width={dimensions.width} 
+            id={props.id} 
+            className={classes.canvas}
+        >
         </canvas>
     )
+}
+
+Canvas.propTypes = {
+    id: PropTypes.string.isRequired,
+    container: PropTypes.string.isRequired,
+    bs: PropTypes.object //.isRequired but due to blocking it has to be initialized as undefined for some pages
 }

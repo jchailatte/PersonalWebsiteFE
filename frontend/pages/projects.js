@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import CardActions from '@material-ui/core/CardActions';
@@ -9,6 +9,9 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 
+import Brushstroke from '../components/brushengine/brushstroke';
+import Canvas from '../components/canvas';
+
 const useStyles = makeStyles((theme)=>(
 {
     media:{
@@ -16,8 +19,7 @@ const useStyles = makeStyles((theme)=>(
     },    
     grow:{
         display: 'flex',
-        flexGrow: 1,
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
     }
 }));
 
@@ -84,18 +86,45 @@ export async function getStaticProps(context){
 export default function Project(prop) {
     const classes = useStyles();
 
-    function Projectsr()
-    {
-        return(
-        items.map((item,index)=>(
-            <React.Fragment key={item.text}>
-            <Grid item xs={12} sm={6} md={4} lg={4} className={classes.grow}>
-                <Card >
+    const [bs, setBs] = useState(undefined);
+    //cant directly set it due to blocking, go figure
+    // const bs = new Brushstroke({
+    //     color: '#FFFFFF',
+    //     inkAmount: 15,
+    //     size: 45,
+    //     lifting: true,
+    //     queue: false,
+    //     duration: 1,
+    //     padding: 5
+    // });
+
+    useEffect(()=>{
+        setBs(new Brushstroke({
+            color: '#FFFFFF',
+            inkAmount: 20,
+            size: 45,
+            lifting: true,
+            queue: true,
+            duration: 1,
+            padding: 10
+        }));
+    },[]);
+
+    return(
+        <Grid container spacing={3}>
+            {items.map((item,index)=>(
+            <Grid item xs={12} sm={6} md={4} lg={4} className={classes.grow} key={index}>
+                <Canvas 
+                    id={"card_canvas"+index}
+                    container={"container"+index}
+                    bs={bs}
+                ></Canvas>
+                <Card style={{background: 'none'}} id={"container"+index}>
                     <CardActionArea disabled style={{height:'90%'}}>
                         <CardMedia
-                        className={classes.media}
-                        image={item.image}
-                        title={item.text}
+                            className={classes.media}
+                            image={item.image}
+                            title={item.text}
                         />
                         <CardContent style={{height: '60%'}}>
                             <Typography gutterBottom variant="h5" component="h2">
@@ -119,14 +148,7 @@ export default function Project(prop) {
                         </Button>
                     </CardActions>
                 </Card>
-            </Grid>
-            </React.Fragment>
-        )));
-    }
-
-    return(
-        <Grid container spacing={3}>
-            <Projectsr items={items}></Projectsr>
+            </Grid>))}
         </Grid>
     )
 };

@@ -13,8 +13,8 @@ import SendIcon from '@material-ui/icons/Send';
 import NoSSR from '@material-ui/core/NoSsr';
 
 import Brushstroke from '../components/brushengine/brushstroke';
+import Canvas from '../components/canvas';
 import NetworkRequest from '../utils/NetworkRequest';
-import { useResize } from '../utils/hooks/useResize';
 
 const useStyles = makeStyles((theme)=>({
     fontstyle:{
@@ -39,9 +39,6 @@ const useStyles = makeStyles((theme)=>({
         backgroundSize: '100% 100%',
         backgroundRepeat: 'no-repeat',
         padding: theme.spacing(2, 4, 3),
-    },
-    canvas:{
-        position: 'absolute'
     },
     index: {
         zIndex:1,
@@ -70,30 +67,24 @@ export default function Contact(prop) {
         message:"",
         copy: false
     };
+    const bs = new Brushstroke({
+        duration:2,
+        inkAmount: 20,
+        size: 70, 
+        color: '#FFFFFF',
+        lifting: true,
+        queue: true
+    });
+
     const [values, setValues] = React.useState(initialState);
     const [errors, setErrors] = React.useState({valid: false});
     const [open, setOpen] = React.useState(false);
     const [valid, setValid] = React.useState(true);
 
-    //Brush values
-    const[bs, setBs] = useState(undefined);
-    const dimensions =  useResize('container');
-
     useEffect(() => {
         const script = document.createElement("script")
         script.src = "https://www.google.com/recaptcha/api.js?render=" + process.env.RECAPTCHA_SITEKEY
         document.body.appendChild(script);
-
-        setBs(new Brushstroke({
-            canvas: document.getElementById('contact_canvas'),
-            ctx: document.getElementById('contact_canvas').getContext('2d'),
-            inkAmount: 15,
-            size: 70, 
-            color: '#FFFFFF',
-            lifting: true,
-            queue: true
-        }));
-
     }, [])    
 
     useEffect(()=>{
@@ -122,12 +113,6 @@ export default function Contact(prop) {
             })
         }
     }, [errors]);
-
-    useEffect(()=>{
-        if(bs != undefined){
-            bs.draw({duration:2, width:dimensions.width, height: dimensions.height});
-        }
-    },[dimensions]);
 
     const handleChange = (prop) => (event) => {
         setValues({ ...values, [prop]: event.target.value });
@@ -201,7 +186,11 @@ export default function Contact(prop) {
             </Fade>
         </Modal>
         <Grid container item spacing={3} xs={12} md={7} className={classes.formbackground} id="container">
-            <canvas id='contact_canvas' height={dimensions.height} width={dimensions.width} className={classes.canvas}></canvas>
+            <Canvas
+                id={'contact_canvas'}
+                container={'container'}
+                bs={bs}
+            ></Canvas>
             <Grid item xs={12} className={classes.index}>
                 <Typography variant='h2' className={classes.fontstyle}>
                     Contact Me!

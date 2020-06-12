@@ -5,8 +5,7 @@ import Grow from '@material-ui/core/Grow';
 import Typography from '@material-ui/core/Typography';
 
 import Brushstroke from '../components/brushengine/brushstroke';
-
-import { useResize } from '../utils/hooks/useResize';
+import Canvas from '../components/canvas';
 
 const useStyles = makeStyles((theme)=>(
 {
@@ -31,9 +30,6 @@ const useStyles = makeStyles((theme)=>(
             width: '40vw'
         }
     },
-    canvas:{
-        position: 'absolute',
-    },
     index: {
         zIndex:1,
     }
@@ -53,39 +49,33 @@ export async function getStaticProps(context){
 export default function Index(props) {
     const classes = useStyles();
 
-    const dimensions = useResize('container');
     const [display1, setDisplay1] = useState(false);
     const [display2, setDisplay2] = useState(false);
-    const [bs, setBs] = useState(undefined);
+    const bs = new Brushstroke({
+        inkAmount: 3,
+        duration: 2,
+        size: 45,
+        lifting: true,
+        queue: true,
+    });
 
     useEffect(()=>{
-        setBs(new Brushstroke({
-            canvas: document.getElementById('index_canvas'),
-            ctx: document.getElementById('index_canvas').getContext('2d'),
-            inkAmount: 3,
-            size: 45,
-            lifting: true,
-            queue: true,
-        }));
+        setTimeout(()=>{            
+            setDisplay1(true);
+        }, 1000);
+
+        setTimeout(()=>{            
+            setDisplay2(true);
+        }, 2000);
     },[]);
-
-    useEffect(()=>{
-        if(bs != undefined){
-            bs.draw({duration:2, width:dimensions.width, height:dimensions.height})
-
-            setTimeout(()=>{            
-                setDisplay1(true);
-            }, 1000);
-
-            setTimeout(()=>{            
-                setDisplay2(true);
-            }, 2000);
-        }
-    },[dimensions]);
 
     return(
         <Grid container direction="column" className={classes.container} id="container">
-            <canvas id='index_canvas' height={dimensions.height} width={dimensions.width} className={classes.canvas}></canvas>
+            <Canvas
+                id={'index_canvas'}
+                container={'container'}
+                bs={bs}
+            ></Canvas>
             <div className={classes.index}>
                 <Grid item xs={12}>
                     <Grow in={display1}>

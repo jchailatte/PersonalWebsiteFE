@@ -13,7 +13,7 @@ export function useResize(elid) {
                 width: document.getElementById(elid).offsetWidth,
                 height: document.getElementById(elid).offsetHeight
             });
-        },100);
+        },200);
     },[]);
 
     useEffect(()=>{
@@ -32,12 +32,12 @@ export function useResize(elid) {
     });
 
     function debounce(fn, ms) {
-        let timer
+        let timer;
         return _ => {
-            clearTimeout(timer)
+            clearTimeout(timer);
             timer = setTimeout(_ => {
-            timer = null
-            fn.apply(this, arguments)
+                timer = null;
+                fn.apply(this, arguments);
             }, ms)
         };
     }
