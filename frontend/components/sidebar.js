@@ -302,7 +302,7 @@ return (
             </List>
         </div>
         </Drawer>
-        <main className ={clsx(classes.content,{[classes.blur]:prop.blur})}>
+        <main id="content" className ={clsx(classes.content,{[classes.blur]:prop.blur})}>
             {prop.children}
         </main>
     </div>

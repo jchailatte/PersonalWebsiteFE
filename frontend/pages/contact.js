@@ -1,5 +1,4 @@
-import React, {useState, useEffect} from 'react';
-
+import React, {useState, useEffect, useRef} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -58,7 +57,7 @@ export async function getStaticProps(context){
 
 export default function Contact(prop) {
     const classes = useStyles();
-    const rootRef = React.useRef(null);
+    const rootRef = useRef(null);
     const validEmailRegex = RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
     const initialState ={
         name: "",
@@ -76,10 +75,10 @@ export default function Contact(prop) {
         queue: true
     });
 
-    const [values, setValues] = React.useState(initialState);
-    const [errors, setErrors] = React.useState({valid: false});
-    const [open, setOpen] = React.useState(false);
-    const [valid, setValid] = React.useState(true);
+    const [values, setValues] = useState(initialState);
+    const [errors, setErrors] = useState({valid: false});
+    const [open, setOpen] = useState(false);
+    const [valid, setValid] = useState(true);
 
     useEffect(() => {
         const script = document.createElement("script")
@@ -100,14 +99,13 @@ export default function Contact(prop) {
                                 setValid(true);
                             }
                             else{
-                                console.log(reponse.message)
                                 setValid(false);
                             }
                             handleOpen();
                         })
                         .catch(error => {
-                                setValid(false);
-                                handleOpen();
+                            setValid(false);
+                            handleOpen();
                         })
                 })
             })
@@ -266,7 +264,7 @@ export default function Contact(prop) {
         </Grid>
         <div
             className="g-recaptcha"
-            data-sitekey="6LeAYvkUAAAAAP1Lq-kAeelmFNjANdEJUvGjolY9"
+            data-sitekey= {process.env.RECAPTCHA_SITEKEY}
             data-size="invisible"
         ></div>
         </React.Fragment>

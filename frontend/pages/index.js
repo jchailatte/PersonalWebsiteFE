@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { makeStyles, useTheme} from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Grow from '@material-ui/core/Grow';
 import Typography from '@material-ui/core/Typography';
@@ -80,7 +80,7 @@ export default function Index(props) {
                 <Grid item xs={12}>
                     <Grow in={display1}>
                         <Typography variant="h2" className={classes.fontstyle}>
-                            Welcome~
+                            Welcome
                         </Typography>
                     </Grow>
                 </Grid>
