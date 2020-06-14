@@ -25,6 +25,8 @@ import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import MeetingRoomIcon from '@material-ui/icons/MeetingRoomRounded';
 
+import { useSelector, useDispatch } from 'react-redux';
+
 const drawerWidth = 250;
 
 const useStyles = makeStyles((theme) => ({
@@ -201,18 +203,30 @@ const footer =
     }
 ];
 
+const useOpen = () => {
+    const open = useSelector((state) => state.open);
+    const dispatch = useDispatch();
+    const handleDrawerOpen = () => {
+        dispatch({
+            type: 'OPEN_TOGGLE'
+        })
+    }
+    const handleDrawerClose = () => {
+        console.log(open);
+
+        dispatch({
+            type: 'CLOSE_TOGGLE'
+        })
+    }
+    return { open, handleDrawerOpen, handleDrawerClose}
+}
+
 export default function Sidebar(prop) {
     const classes = useStyles();
-    const [open, setOpen] = React.useState(true);
+    //const [open, setOpen] = React.useState(true);
     const [openCollapse, setOpenCollapse] = React.useState(false);
 
-    var handleDrawerOpen = () => {
-        setOpen(true);
-    };
-
-    var handleDrawerClose = () => {
-        setOpen(false);
-    };
+    const { open, handleDrawerOpen, handleDrawerClose } = useOpen();
 
     const handleOpenSetting = () => { 
         setOpenCollapse(!openCollapse);

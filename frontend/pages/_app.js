@@ -8,7 +8,7 @@ import { Provider } from 'react-redux'
 import theme from '../components/theme';
 import Background from '../components/background';
 import Sidebar from '../components/sidebar';
-import { useStore } from '../redux/store';
+import { useStore } from '../utils/store';
 
 import 'react-pdf/dist/Page/AnnotationLayer.css';
 

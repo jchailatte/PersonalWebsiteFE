@@ -2,7 +2,6 @@ import { useMemo } from 'react';
 import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
-import rootReducer from './reducers/rootReducer';
 
 
 //https://github.com/vercel/next.js/blob/canary/examples/with-redux/store.js
@@ -12,6 +11,23 @@ let store;
 const initialState = {
     open: true
 };
+
+const rootReducer = (state = initialState, action) => {
+    switch(action.type) {
+        case 'OPEN_TOGGLE':
+            return {
+                ...state, 
+                open: true
+            }
+        case 'CLOSE_TOGGLE':
+            return {
+                ...state,
+                open: false
+            }
+        default: 
+            return state
+    }
+}
 
 function initStore(preloadedState = initialState) {
     return createStore(
