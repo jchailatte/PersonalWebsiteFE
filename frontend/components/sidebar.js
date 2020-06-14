@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
+import Link from 'next/link';
 import { makeStyles } from '@material-ui/core/styles';
 import Collapse from '@material-ui/core/Collapse';
 import Divider from '@material-ui/core/Divider';
@@ -161,11 +162,13 @@ const sbitems =
     {
         text: 'Blog',
         icon: <ForumIcon/>,
+        href: '/',
         disable: true
     },
     {
         text: 'Rooms',
         icon: <MeetingRoomIcon/>,
+        href: '/',
         disable: true
     },
     // {
@@ -212,8 +215,6 @@ const useOpen = () => {
         })
     }
     const handleDrawerClose = () => {
-        console.log(open);
-
         dispatch({
             type: 'CLOSE_TOGGLE'
         })
@@ -223,70 +224,71 @@ const useOpen = () => {
 
 export default function Sidebar(prop) {
     const classes = useStyles();
-    //const [open, setOpen] = React.useState(true);
+    const [open, setOpen] = React.useState(true);
     const [openCollapse, setOpenCollapse] = React.useState(false);
 
-    const { open, handleDrawerOpen, handleDrawerClose } = useOpen();
+    //const { open, handleDrawerOpen, handleDrawerClose } = useOpen();
+
+    const handleDrawerOpen = () => {
+        setOpen(true);
+    };
+
+    const handleDrawerClose = () => {
+        setOpen(false);
+    };
 
     const handleOpenSetting = () => { 
         setOpenCollapse(!openCollapse);
     }
 
-function Itemsr({items,depth})
-{
-    return(
-        items.map((item,index) => (
-        <React.Fragment key={item.text}>
-        {!item.nested ? (
-        <ListItem button component='a' href={item.href} target={item.target}
-            selected={prop.selected == item.text} 
-            className={clsx(classes.opennested,{[classes.nested]: open && depth>0},{[classes.nestedbackground]:depth>0})}
-            disabled={item.disable}
-        >
-            <ListItemIcon>{item.icon}</ListItemIcon>
-            <ListItemText primary={item.text} className={classes.fontstyle} disableTypography></ListItemText>
-        </ListItem>
-        ):(
-        <React.Fragment key={item.text}>
-        <ListItem button onClick={handleOpenSetting} disabled={item.disable}>
-            <ListItemIcon>{item.icon}</ListItemIcon>
-            <ListItemText primary={item.text} className={classes.fontstyle} disableTypography/>
-            {openCollapse ? <ExpandLessIcon/> : <ExpandMoreIcon/>}
-        </ListItem>
-            <Collapse in={openCollapse} timeout="auto" unmountOnExit>
-                <List disablePadding>
-                <Itemsr items={item.children} depth={depth+1}></Itemsr>
-                </List>
-            </Collapse>
-        </React.Fragment>
-        )}
-        </React.Fragment>
-        )));
-}
+// function Itemsr({items,depth})
+// {
+//     return(
+//         items.map((item,index) => (
+//         <React.Fragment key={item.text}>
+//         {!item.nested ? (
+
+//         ):(
+//         <React.Fragment key={item.text}>
+//         <ListItem button onClick={handleOpenSetting} disabled={item.disable}>
+//             <ListItemIcon>{item.icon}</ListItemIcon>
+//             <ListItemText primary={item.text} className={classes.fontstyle} disableTypography/>
+//             {openCollapse ? <ExpandLessIcon/> : <ExpandMoreIcon/>}
+//         </ListItem>
+//             <Collapse in={openCollapse} timeout="auto" unmountOnExit>
+//                 <List disablePadding>
+//                 <Itemsr items={item.children} depth={depth+1}></Itemsr>
+//                 </List>
+//             </Collapse>
+//         </React.Fragment>
+//         )}
+//         </React.Fragment>
+//         )));
+// }
 
 return (
     <div className={classes.root}>
         <Drawer
-        variant="permanent"
-        className={clsx(classes.drawer, {
-            [classes.drawerOpen]: open,
-            [classes.drawerClose]: !open,
-        })}
-        classes={{
-            paper: clsx({
-                [`${classes.drawerOpen} ${classes.paperstyle}`]: open,
-                [`${classes.drawerClose} ${classes.paperstyle}`]: !open,
-            }),
-        }}
+            variant="permanent"
+            className={clsx(classes.drawer, {
+                [classes.drawerOpen]: open,
+                [classes.drawerClose]: !open,
+            })}
+            classes={{
+                paper: clsx({
+                    [`${classes.drawerOpen} ${classes.paperstyle}`]: open,
+                    [`${classes.drawerClose} ${classes.paperstyle}`]: !open,
+                }),
+            }}
         >
         <div>
             <div className={classes.toolbar}>
-                <a href="/" id='logo'>
+                <Link href="/">
                     <img src={"graphics/logo.png"} alt='logo' height="40" width="40" className={classes.logo}></img>
-                </a>
+                </Link>
                 <div className={classes.title}>CaeCeus</div>
                 <IconButton onClick={open ? handleDrawerClose : handleDrawerOpen} className={classes.iconbutton}>
-                {!open ? <ChevronRightIcon/> : <ChevronLeftIcon/>}
+                    {!open ? <ChevronRightIcon/> : <ChevronLeftIcon/>}
                 </IconButton>
             </div>
             <ListItem className={clsx(classes.closehide,{[classes.hide]: !open})}>
@@ -300,13 +302,41 @@ return (
             </ListItem>
             <Divider />
             <List id='mainsb'>
-                <Itemsr items={sbitems} depth={0}></Itemsr>
+                {sbitems.map((item,index)=>(
+                    <Link href={item.href} key={index}>
+                        <ListItem button component='a'
+                            selected={item.text===prop.selected}
+                            className={classes.opennested}
+                            disabled={item.disable}
+                        >
+                            <ListItemIcon>{item.icon}</ListItemIcon>
+                            <ListItemText 
+                                disableTypography 
+                                primary={item.text} 
+                                className={classes.fontstyle}
+                            >
+                            </ListItemText>
+                        </ListItem>
+                    </Link>
+                ))}
             </List>
         </div>
         <div>
             <Divider/>
             <List>
-                <Itemsr items={footer} depth={0}></Itemsr>
+                {footer.map((item, index)=>(
+                    <ListItem button component='a' 
+                        href={item.href} 
+                        target={item.target}
+                        selected={item.text === prop.selected} 
+                        className={classes.opennested}
+                        disabled={item.disable}
+                        key={index}
+                    >
+                        <ListItemIcon>{item.icon}</ListItemIcon>
+                        <ListItemText primary={item.text} className={classes.fontstyle} disableTypography></ListItemText>
+                    </ListItem>
+                ))}
                 <ListItem>
                     <ListItemIcon><CopyrightIcon fontSize="small"/></ListItemIcon>
                     <ListItemText>
@@ -325,7 +355,7 @@ return (
 
 Sidebar.propTypes = {
     selected: PropTypes.string.isRequired,
-    blur: PropTypes.bool,
     quote: PropTypes.string.isRequired,
-    by: PropTypes.string.isRequired
+    by: PropTypes.string.isRequired,
+    blur: PropTypes.bool,
 }

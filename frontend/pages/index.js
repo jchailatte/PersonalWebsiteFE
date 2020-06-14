@@ -41,7 +41,7 @@ export async function getStaticProps(context){
         props:{
             selected: 'Home',
             quote: "Making a choice doesn't have to have any meaning, but it might have some. We live on Earth, not for any meaning, but to be meaningful.",
-            by: 'Jiang Ye'
+            by: 'Jiang Ye',
         }
     }
 }
