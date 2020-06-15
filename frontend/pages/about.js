@@ -3,11 +3,15 @@ import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import Grid from '@material-ui/core/Grid';
 import Hidden from '@material-ui/core/Hidden';
-import PropTypes from 'prop-types';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import { Document, Page, pdfjs } from 'react-pdf';
+
+import { TabPanel, tabProps } from '../components/tabpanel';
+import Brushstroke from '../components/brushengine/brushstroke';
+import Canvas from '../components/canvas';
+import { useResize } from '../utils/hooks/useResize';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
@@ -50,10 +54,6 @@ const useStyles = makeStyles((theme) => ({
         backgroundSize: '100% 100%',
         textAlign: 'center',
     },
-    sumbackground:{
-        backgroundImage: `url(/graphics/flatstroke.png)`,
-        backgroundSize: '100% 100%',
-    },
     itemstyle1:
     {
         [theme.breakpoints.down('md')]:{
@@ -62,10 +62,8 @@ const useStyles = makeStyles((theme) => ({
         }
     },
     tabs:{
-        backgroundImage: `url(/graphics/stroke.png)`,
-        backgroundSize: '100% 100%',
-        backgroundRepeat: 'no-repeat'
-        
+        backgroundColor: '#000000',
+        borderRadius: '15px',
     },
     restyle:{
         display: 'flex',
@@ -76,10 +74,13 @@ const useStyles = makeStyles((theme) => ({
         borderStyle: 'solid',
         borderWidth: 'thick',
     },
+    index:{
+        zIndex: 1
+    }
 }));
 
 const items=[
-    'The site was built using: React, Material UI, Next.js',
+    'The site was built using: React, Material UI, Next.js, Redux',
     'The site is being hosted by: Digital Ocean and running on Nginx and PM2',
     'The artwork was drawn(by me) using: Krita, Wacom Intuos Drawing Tablet',
     'Hobbies I have: Light Novels, Anime/Manga, League of Legends, TeamFight Tactics, and recently Valorant' 
@@ -98,48 +99,19 @@ export async function getStaticProps(context){
 export default function About(props){
     const classes = useStyles();
     const [value, setValue] = useState(0);       
-    const [width, setWidth] = useState(0);
+    const dimensions = useResize('content');
 
-    useEffect(()=>{
-        setWidth(window.innerWidth);
-    },[]);
+    const bs = new Brushstroke({
+        duration: 1.5, 
+        inkAmount: 10,
+        size: 40,
+        lifting: true,
+        queue: true
+    })
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
-
-    TabPanel.propTypes = {
-        children: PropTypes.node,
-        index: PropTypes.any.isRequired,
-        value: PropTypes.any.isRequired,
-    };
-
-    function TabPanel(props) {
-        const { children, value, index, ...other } = props;
-      
-        return (
-            <div
-                role="tabpanel"
-                hidden={value !== index}
-                id={`tabpanel-${index}`}
-                aria-labelledby={`tab-${index}`}
-                {...other}
-            >
-                {value === index && (
-                    <React.Fragment>
-                        {children}
-                    </React.Fragment>
-                )}
-            </div>
-        );
-    }
-
-    function tabProps(index) {
-        return {
-            id: `tab-${index}`,
-            'aria-controls': `tabpanel-${index}`,
-        };
-    }
 
     const TabPanel1 = () => {
         return(
@@ -157,29 +129,46 @@ export default function About(props){
                             </Card>
                         </Hidden>
                     </Grid>
-                    <div style={{display:'flex'}} className={classes.sumbackground}>
-                    <Grid item xs={2}>
-                        <Hidden smDown implementation="css">
-                        <Typography variant='h1' className={classes.fontstyle}>
-                        Hi!
-                        </Typography>
-                        </Hidden>
+                    <Grid item id="container1" xs={12} style={{display:'flex'}}>
+                        <Canvas 
+                            id={'about1_canvas'}
+                            container={'container1'}
+                            bs={bs}
+                        ></Canvas> 
+                        <Grid item xs={2} className={classes.index}>
+                            <Hidden smDown implementation="css">
+                            <Typography variant='h1' className={classes.fontstyle}>
+                            Hi!
+                            </Typography>
+                            </Hidden>
+                        </Grid>
+                        <Grid item md={9} xs={12} className={classes.index}>
+                            <Typography variant="h4" className={classes.fontstyle}>
+                                I'm a video game-playing, book-reading, aesthetic-fanatic techie located in the SF Area. 
+                                Recently graduated from the University of Southern California with a Computer Science B.S., 
+                                I'm currently looking for a full-time job (or freelance job if it's interesting 😄). 
+                            </Typography>
+                        </Grid>
                     </Grid>
-                    <Grid item md={9} xs={12} >
-                        <Typography variant="h4" className={classes.fontstyle}>
-                            I'm a video game-playing, book-reading, aesthetic-fanatic techie located in the SF Area. 
-                            Recently graduated from the University of Southern California with a Computer Science B.S., I'm currently looking for a full-time job (or freelance job if it's interesting). 
-                        </Typography>
-                    </Grid>
-                    </div>
-                    <Grid item xs={12}></Grid>
-                    <Grid item xs={12} className={classes.sumbackground}>
-                        <Typography variant="h5" className={classes.fontstyle}>
-                        For those of you that are curious...
-                        </Typography>
-                        <ul>
-                            <Ulr items={items}></Ulr>
-                        </ul>
+                    <Grid item xs={12} id="container2" style={{display:'flex'}}>
+                        <Canvas 
+                            id={'about2_canvas'}
+                            container={'container2'}
+                            bs={bs}
+                        ></Canvas> 
+                        <div className={classes.index}>
+                            <Typography variant="h5" className={classes.fontstyle}>
+                            For those of you that are curious...
+                            </Typography>
+                            <ul>
+                                {items.map((item,index)=>(
+                                <li key={item} className={classes.fontstyle}>
+                                    <Typography variant="h6" className={classes.fontstyle}>
+                                        {item}
+                                    </Typography>
+                                </li>))}
+                            </ul>
+                        </div>
                     </Grid>
                 </Grid>
                 <Grid item sm={3} xs={12} className={classes.itemstyle1} align="center">
@@ -199,24 +188,12 @@ export default function About(props){
                 <Page 
                     pageNumber={1} 
                     className={classes.border}
-                    width={0.6*width}
+                    width={0.8*dimensions.width}
                 ></Page>
             </Document>
         );
     }
     
-    function Ulr()
-    {
-        return(
-            items.map((item,index)=>(
-                <li key={item} className={classes.fontstyle}>
-                    <Typography variant="h6" className={classes.fontstyle}>
-                        {item}
-                    </Typography>
-                </li>
-        )));
-    };
-
     return(
         <React.Fragment>
             <Tabs

@@ -3,12 +3,11 @@ import { useSelector } from 'react-redux';
 
 export function useResize(elid) {
 
+    const open = useSelector(state=> state.open);
     const [dimensions, setDimensions] = useState({
         width: 0,
         height:0,
     });
-
-    const open = useSelector(state=> state.open);
 
     useEffect(()=> {
         setTimeout(()=>{

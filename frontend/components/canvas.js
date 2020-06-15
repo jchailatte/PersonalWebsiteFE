@@ -1,19 +1,9 @@
 import { useEffect } from 'react';
-import { makeStyles} from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 
 import { useResize } from '../utils/hooks/useResize';
 
-const useStyles = makeStyles((theme)=>(
-{
-    canvas: {
-        position: 'absolute',
-    }
-}));
-
 export default function Canvas(props) {
-    const classes = useStyles();
-
     const dimensions = useResize(props.container);
     
     useEffect(()=>{
@@ -32,7 +22,7 @@ export default function Canvas(props) {
             height={dimensions.height} 
             width={dimensions.width} 
             id={props.id} 
-            className={classes.canvas}
+            style={{position: 'absolute'}}
         >
         </canvas>
     )

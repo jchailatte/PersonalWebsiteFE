@@ -206,22 +206,11 @@ const footer =
     }
 ];
 
-
-
 export default function Sidebar(prop) {
     const classes = useStyles();
-    //const [open, setOpen] = React.useState(true);
     const [openCollapse, setOpenCollapse] = React.useState(false);
 
     const { open, handleDrawerOpen, handleDrawerClose } = useOpen();
-
-    // const handleDrawerOpen = () => {
-    //     setOpen(true);
-    // };
-
-    // const handleDrawerClose = () => {
-    //     setOpen(false);
-    // };
 
     const handleOpenSetting = () => { 
         setOpenCollapse(!openCollapse);
@@ -340,8 +329,8 @@ return (
 }
 
 Sidebar.propTypes = {
-    selected: PropTypes.string.isRequired,
-    quote: PropTypes.string.isRequired,
-    by: PropTypes.string.isRequired,
+    selected: PropTypes.string,
+    quote: PropTypes.string,
+    by: PropTypes.string,
     blur: PropTypes.bool,
 }
