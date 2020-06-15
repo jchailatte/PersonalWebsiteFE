@@ -68,7 +68,7 @@ export default function Contact(prop) {
     };
     const bs = new Brushstroke({
         duration:2,
-        inkAmount: 20,
+        inkAmount: 15,
         size: 70, 
         color: '#FFFFFF',
         lifting: true,

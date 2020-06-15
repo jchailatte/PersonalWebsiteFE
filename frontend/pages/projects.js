@@ -105,8 +105,8 @@ export default function Project(prop) {
             size: 45,
             lifting: true,
             queue: true,
-            duration: 1,
-            padding: 10
+            duration: 0.5,
+            padding: 15
         }));
     },[]);
 

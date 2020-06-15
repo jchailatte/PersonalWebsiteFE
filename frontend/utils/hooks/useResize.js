@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
 export function useResize(elid) {
 
@@ -7,6 +8,8 @@ export function useResize(elid) {
         height:0,
     });
 
+    const open = useSelector(state=> state.open);
+
     useEffect(()=> {
         setTimeout(()=>{
             setDimensions({
@@ -14,7 +17,7 @@ export function useResize(elid) {
                 height: document.getElementById(elid).offsetHeight
             });
         },200);
-    },[]);
+    },[open]);
 
     useEffect(()=>{
         const debouncedHandleResize = debounce(function handleResize() {
