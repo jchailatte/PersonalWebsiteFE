@@ -27,4 +27,11 @@ also could use Digital Ocean one-click app
 https://docs.docker.com/compose/install/ -> linux
 
 //adding SSH key
-http://bytes.usc.edu/cs104/labs/01_git.html
+http://bytes.usc.edu/cs104/labs/01_git.html\
+
+npm run docker-build-multistage
+
+docker image ls
+docker run --publish 3000:3000 --detach --name next next-app:latest
+
+docker rmi $(docker images | grep "^<none>" | awk "{print $3}")
