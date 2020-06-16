@@ -1,17 +1,30 @@
 make the other pages lol
 
-maybe make a janky under construction page
-    like 'What r u doing here'
-
 make error page
 
 potentially add transitions to the pages  
+	canvas object either within the sidebar or in _app itself
 
 make a nice fancy button :D <- ha
 
 https://gist.github.com/Kocisov/2a9567eb51b83dfef48efce02ef3ab06?fbclid=IwAR2bxrp91Prd60CaWyp0Tgla4i4WT2m6oP-O0KcHYJuBJZo2d-_Y3n0h3Ec
 
-also resize upon clicking the sidebar wheeee
-	this might be able to be done by attaching the Open bool to useResize's useEffect
-
 also do the brushstroke for the modal in the contact page
+
+might need to memoize the Brushstroke object within redux maybe? (useMemo)
+
+
+~
+https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-18-04
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get dist-upgrade
+sudo reboot
+https://docs.docker.com/engine/install/ubuntu/
+
+also could use Digital Ocean one-click app
+
+https://docs.docker.com/compose/install/ -> linux
+
+//adding SSH key
+http://bytes.usc.edu/cs104/labs/01_git.html

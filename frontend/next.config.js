@@ -17,7 +17,7 @@ const {
                 return 'http://localhost:8080/'
             }
             if (isProd) {
-                return 'https://161.35.228.213/'
+                return 'https://161.35.228.213:8080/'
             }
         })(),
         RECAPTCHA_SITEKEY: (()=>{
