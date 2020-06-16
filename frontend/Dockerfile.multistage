@@ -4,7 +4,7 @@ WORKDIR /app
 COPY package.json .
 RUN npm install
 COPY . .
-RUN yarn build && yarn --production
+RUN npm run build
 
 # And then copy over node_modules, etc from that stage to the smaller base image
 FROM mhart/alpine-node:base
