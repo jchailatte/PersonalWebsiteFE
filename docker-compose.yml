@@ -1,6 +1,6 @@
 version: '3.7'
 services:
-    site-server:
+    site-client:
         container_name: next
         build:
             context: frontend
@@ -11,7 +11,7 @@ services:
         networks: 
             - frontend
     
-    site-client: 
+    site-server: 
         container_name: backend
         build: 
             context: ../PersonalWebsiteBE/backend
