@@ -1,7 +1,7 @@
 version: '3.7'
 services:
     site-client:
-        container_name: next:latest
+        container_name: next
         build:
             context: frontend
             dockerfile: Dockerfile
@@ -12,7 +12,7 @@ services:
             - frontend
     
     site-server: 
-        container_name: backend:latest
+        container_name: backend
         build: 
             context: ../PersonalWebsiteBE/backend
             dockerfile: Dockerfile
