@@ -17,7 +17,7 @@ const {
                 return 'http://localhost:8080/'
             }
             if (isProd) {
-                return 'http://site-server:8080'
+                return 'https://jchai.tech/api'
             }
         })(),
         RECAPTCHA_SITEKEY: (()=>{
