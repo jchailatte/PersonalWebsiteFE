@@ -76,7 +76,8 @@ const useStyles = makeStyles((theme) => ({
 
 const items=[
     'The site was built using: React, Material UI, Next.js, Redux',
-    'The site is being hosted by: Digital Ocean and running on Nginx and PM2',
+    'The backend is build using: Spring Boot and Java',
+    'The everything is running using: Digital Ocean, Docker, and Nginx',
     'The artwork was drawn(by me) using: Krita, Wacom Intuos Drawing Tablet',
     'Hobbies I have: Light Novels, Anime/Manga, League of Legends, TeamFight Tactics, and recently Valorant' 
 ];
