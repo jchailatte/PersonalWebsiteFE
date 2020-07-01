@@ -16,6 +16,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import CodeIcon from '@material-ui/icons/Code';
 import CopyrightIcon from '@material-ui/icons/Copyright';
+import DescriptionIcon from '@material-ui/icons/Description';
 import EmailIcon from '@material-ui/icons/Email';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
@@ -113,9 +114,8 @@ const useStyles = makeStyles((theme) => ({
     },
     quote:{
         whiteSpace:'normal',
-        fontWeight: 'bold',
-        fontFamily:"'Shadows Into Light', cursive",
-        fontSize: '16px',
+        fontFamily:"'Raleway', sans-serif",
+        fontSize: '14px',
     },
     logo:{
         marginTop: '10px',
@@ -148,6 +148,11 @@ const sbitems =
         text: 'About',
         icon: <AccountBoxIcon/>,
         href: '/about',
+    },
+    {
+        text: 'Resume',
+        icon: <DescriptionIcon/>,
+        href: '/resume',
     },
     {
         text: 'Projects',

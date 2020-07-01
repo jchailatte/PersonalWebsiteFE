@@ -16,6 +16,15 @@ const theme = responsiveFontSizes(createMuiTheme({
             default: '#f7f1e1',
         },
     },
+    typography: {
+        fontFamily: "'Raleway', san-serif",
+    },
+    overrides: {
+
+    },
+    props: {
+    }
+
 }));
 
 export default theme;

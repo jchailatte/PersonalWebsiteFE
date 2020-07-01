@@ -1,4 +1,5 @@
 import React, {useState, useEffect, useRef} from 'react';
+import Head from 'next/head';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -68,7 +69,7 @@ export default function Contact(prop) {
     };
     const bs = new Brushstroke({
         duration:2,
-        inkAmount: 15,
+        inkAmount: 10,
         size: 70, 
         color: '#FFFFFF',
         lifting: true,
@@ -167,6 +168,9 @@ export default function Contact(prop) {
 
     return(
         <React.Fragment>
+        <Head>
+            <title key="title">Jonathan Chai - Contact</title>
+        </Head>
         <Modal
             disablePortal
             disableEnforceFocus

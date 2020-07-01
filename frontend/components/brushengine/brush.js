@@ -50,12 +50,10 @@ export default class Brush extends React.Component{
             cv = Math.cos(a1);
             sv = Math.sin(a1); 
 
-            const inkRand = Math.ceil(Math.random() * Math.floor(this.inkAmount));
-
             this._tip.push(new Hair(
                 this.x + x1 * cv - y1 * sv,
                 this.y + x1 * sv + y1 * cv,
-                inkRand,
+                this.inkAmount,
                 this.color
             ))
         }

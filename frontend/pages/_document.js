@@ -11,11 +11,10 @@ export default class MyDocument extends Document {
         return (
             <Html lang="en">
                 <Head>
-                    {/* PWA primary color */}
                     <meta name="theme-color" content={theme.palette.primary.main} />
-                    <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap" rel="stylesheet"></link>
                     <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap" rel="stylesheet"></link>
                     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap" rel="stylesheet"></link>
+                    <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet"></link>
                 </Head>
                 <body>
                     <Main />

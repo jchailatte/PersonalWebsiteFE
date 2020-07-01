@@ -10,10 +10,10 @@ import Canvas from '../components/canvas';
 const useStyles = makeStyles((theme)=>(
 {
     fontstyle:{
-        color: 'white',
-        textShadow: '0 0 5px black, 0 0 5px black', 
         fontFamily: "'Caveat', cursive",
         textAlign: 'center',
+        color: 'white',
+        textShadow: '0 0 5px black, 0 0 5px black', 
     },
     container:{
         zIndex: 1,
@@ -53,10 +53,9 @@ export default function Index(props) {
     const [display2, setDisplay2] = useState(false);
     const bs = new Brushstroke({
         inkAmount: 3,
-        duration: 2,
+        duration: 1.5,
         size: 45,
         lifting: true,
-        queue: true,
     });
 
     useEffect(()=>{
@@ -66,17 +65,17 @@ export default function Index(props) {
 
         setTimeout(()=>{            
             setDisplay2(true);
-        }, 2000);
+        }, 1500);
     },[]);
 
     return(
-        <Grid container direction="column" className={classes.container} id="container">
+        <Grid container direction="column" className={classes.container}>
             <Canvas
                 id={'index_canvas'}
                 container={'container'}
                 bs={bs}
             ></Canvas>
-            <div className={classes.index}>
+            <div className={classes.index} id="container">
                 <Grid item xs={12}>
                     <Grow in={display1}>
                         <Typography variant="h2" className={classes.fontstyle}>

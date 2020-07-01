@@ -30,9 +30,9 @@ export default function App(props) {
     return (
         <React.Fragment>
             <Head>
-                <title>CaeCeus - Jonathan Chai</title>
+                <title key="title">Jonathan Chai</title>
                 <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
-                <meta name="description" content="A little personal website for me or as I like to call it, my developer sandbox"></meta>
+                <meta name="description" key="description" content="A little personal website for me or as I like to call it, my developer sandbox" key="description"></meta>
                 <link rel="icon" href='/graphics/logo.ico'/>
             </Head>
             <ThemeProvider theme={theme}>
