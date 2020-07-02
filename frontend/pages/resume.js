@@ -23,8 +23,8 @@ export async function getStaticProps(context){
     return{
         props:{
             selected: 'Resume',
-            quote: "",
-            by: "",
+            quote: "Every single life has his or her own dreams. Precisely because all living beings have their own will makes this world so much more brilliant and exciting.",
+            by: "Lord Xue Xing",
         }
     }
 }

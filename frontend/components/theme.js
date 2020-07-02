@@ -23,6 +23,9 @@ const theme = responsiveFontSizes(createMuiTheme({
 
     },
     props: {
+        MuiButton: {
+            color: 'primary'
+        }
     }
 
 }));

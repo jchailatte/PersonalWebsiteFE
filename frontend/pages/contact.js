@@ -251,7 +251,6 @@ export default function Contact(prop) {
                 <Button 
                     type="submit"
                     variant="contained" 
-                    color = "primary"
                     size="large" 
                     endIcon={<SendIcon/>} 
                     onClick={errorCheck}

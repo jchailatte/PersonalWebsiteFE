@@ -21,7 +21,7 @@ const {
             }
         })(),
         RECAPTCHA_SITEKEY: (()=>{
-            return '6LeAYvkUAAAAAP1Lq-kAeelmFNjANdEJUvGjolY9';
+            return '6LdtRawZAAAAAEluZgHqnNg-h-2J0aP8etHCTPk4';
         })(),
     }
   
