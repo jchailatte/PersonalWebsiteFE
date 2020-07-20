@@ -76,6 +76,7 @@ export default function Contact(prop) {
         queue: true
     });
 
+    //probably can optimize with useReducer at some point
     const [values, setValues] = useState(initialState);
     const [errors, setErrors] = useState({valid: false});
     const [open, setOpen] = useState(false);
@@ -168,108 +169,108 @@ export default function Contact(prop) {
 
     return(
         <React.Fragment>
-        <Head>
-            <title key="title">Jonathan Chai - Contact</title>
-        </Head>
-        <Modal
-            disablePortal
-            disableEnforceFocus
-            disableAutoFocus
-            open = {open}
-            onClose = {handleClose}
-            className={classes.modal}
-            container={() => rootRef.current}
-        >
-            <Fade in={open}>
-                <div className={classes.paper}>
-                    <img src={valid?"graphics/wcheckmark.png" : "graphics/werror.png"}></img>
-                    <h1 className={classes.fontstyle}>{valid ? "Message Successfully Sent" : "Message Failed to Send"}</h1>
-                </div>
-            </Fade>
-        </Modal>
-        <Grid container item spacing={3} xs={12} md={7} className={classes.formbackground} id="container">
-            <Canvas
-                id={'contact_canvas'}
-                container={'container'}
-                bs={bs}
-            ></Canvas>
-            <Grid item xs={12} className={classes.index}>
-                <Typography variant='h2' className={classes.fontstyle}>
-                    Contact Me!
-                </Typography>
-            </Grid>
-            <Grid item xs={12}>
-                <NoSSR>
+            <Head>
+                <title key="title">Jonathan Chai - Contact</title>
+            </Head>
+            <Modal
+                disablePortal
+                disableEnforceFocus
+                disableAutoFocus
+                open = {open}
+                onClose = {handleClose}
+                className={classes.modal}
+                container={() => rootRef.current}
+            >
+                <Fade in={open}>
+                    <div className={classes.paper}>
+                        <img src={valid?"graphics/wcheckmark.png" : "graphics/werror.png"}></img>
+                        <h1 className={classes.fontstyle}>{valid ? "Message Successfully Sent" : "Message Failed to Send"}</h1>
+                    </div>
+                </Fade>
+            </Modal>
+            <Grid container item spacing={3} xs={12} md={7} className={classes.formbackground} id="container">
+                <Canvas
+                    id={'contact_canvas'}
+                    container={'container'}
+                    bs={bs}
+                ></Canvas>
+                <Grid item xs={12} className={classes.index}>
+                    <Typography variant='h2' className={classes.fontstyle}>
+                        Contact Me!
+                    </Typography>
+                </Grid>
+                <Grid item xs={12}>
+                    <NoSSR>
+                        <TextField
+                            label="Name" 
+                            variant="outlined" 
+                            required
+                            fullWidth
+                            value={values.name}
+                            onChange={handleChange('name')}
+                            error={errors.name || false}
+                            autoFocus={true}
+                        />
+                    </NoSSR>
+                </Grid>
+                <Grid item xs={12}>
                     <TextField
-                        label="Name" 
-                        variant="outlined" 
+                        label="Email"
+                        variant="outlined"
                         required
                         fullWidth
-                        value={values.name}
-                        onChange={handleChange('name')}
-                        error={errors.name || false}
-                        autoFocus={true}
-                    />
-                </NoSSR>
-            </Grid>
-            <Grid item xs={12}>
-                <TextField
-                    label="Email"
-                    variant="outlined"
-                    required
-                    fullWidth
-                    value={values.email}
-                    onChange={handleChange('email')}
-                    error={errors.email || false}
-                /> 
-            </Grid>
-            <Grid item xs={12}>
-                <TextField
-                    label="Subject"
-                    variant="outlined"
-                    required
-                    fullWidth
-                    value={values.subject}
-                    onChange={handleChange('subject')}
-                    error={errors.subject || false}
-                /> 
-            </Grid>
-            <Grid item xs={12}>
-                <TextField
-                    label="Message"
-                    variant="outlined"
-                    required
-                    fullWidth
-                    multiline
-                    rows={15}
-                    value={values.message}
-                    onChange={handleChange('message')}
-                    error={errors.message || false}
-                />
-            </Grid>
-            <Grid item xs={12} sm={4}>
-                <Button 
-                    type="submit"
-                    variant="contained" 
-                    size="large" 
-                    endIcon={<SendIcon/>} 
-                    onClick={errorCheck}
-                >
-                    Submit
-                </Button>
-            </Grid>
-            <Grid item xs={12} sm={8} className={classes.index}>
-                    <FormControlLabel
-                        control={<Checkbox checked={values.copy} onChange={handleCheck} name="copy"/>}
-                        label="Receive a copy"
+                        value={values.email}
+                        onChange={handleChange('email')}
+                        error={errors.email || false}
+                    /> 
+                </Grid>
+                <Grid item xs={12}>
+                    <TextField
+                        label="Subject"
+                        variant="outlined"
+                        required
+                        fullWidth
+                        value={values.subject}
+                        onChange={handleChange('subject')}
+                        error={errors.subject || false}
+                    /> 
+                </Grid>
+                <Grid item xs={12}>
+                    <TextField
+                        label="Message"
+                        variant="outlined"
+                        required
+                        fullWidth
+                        multiline
+                        rows={15}
+                        value={values.message}
+                        onChange={handleChange('message')}
+                        error={errors.message || false}
                     />
                 </Grid>
-        </Grid>
-        <div
-            className="g-recaptcha"
-            data-sitekey= {process.env.RECAPTCHA_SITEKEY}
-            data-size="invisible"
-        ></div>
+                <Grid item xs={12} sm={4}>
+                    <Button 
+                        type="submit"
+                        variant="contained" 
+                        size="large" 
+                        endIcon={<SendIcon/>} 
+                        onClick={errorCheck}
+                    >
+                        Submit
+                    </Button>
+                </Grid>
+                <Grid item xs={12} sm={8} className={classes.index}>
+                        <FormControlLabel
+                            control={<Checkbox checked={values.copy} onChange={handleCheck} name="copy"/>}
+                            label="Receive a copy"
+                        />
+                    </Grid>
+            </Grid>
+            <div
+                className="g-recaptcha"
+                data-sitekey={process.env.RECAPTCHA_SITEKEY}
+                data-size="invisible"
+            ></div>
         </React.Fragment>
     )
 }

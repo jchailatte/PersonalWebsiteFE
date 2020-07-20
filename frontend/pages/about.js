@@ -5,12 +5,9 @@ import Card from '@material-ui/core/Card';
 import Grid from '@material-ui/core/Grid';
 import Hidden from '@material-ui/core/Hidden';
 import Typography from '@material-ui/core/Typography';
-import { Document, Page, pdfjs } from 'react-pdf';
 
 import Brushstroke from '../components/brushengine/brushstroke';
 import Canvas from '../components/canvas';
-
-pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 const useStyles = makeStyles((theme) => ({
     fontstyle:{

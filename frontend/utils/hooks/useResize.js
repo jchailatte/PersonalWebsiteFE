@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
+//https://www.pluralsight.com/guides/re-render-react-component-on-window-resize
+
 export function useResize(elid) {
 
     const open = useSelector(state=> state.open);

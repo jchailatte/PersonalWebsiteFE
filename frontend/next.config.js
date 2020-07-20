@@ -20,7 +20,7 @@ const {
                 return 'https://jchai.tech/api'
             }
         })(),
-        RECAPTCHA_SITEKEY: (()=>{
+        RECAPTCHA_SITEKEY: (() => {
             return '6LdtRawZAAAAAEluZgHqnNg-h-2J0aP8etHCTPk4';
         })(),
     }
