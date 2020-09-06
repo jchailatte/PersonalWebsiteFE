@@ -164,18 +164,18 @@ const sbitems =
         icon: <EmailIcon/>,
         href: '/contact',
     },
-    {
-        text: 'Blog',
-        icon: <ForumIcon/>,
-        href: '/',
-        disable: true
-    },
-    {
-        text: 'Rooms',
-        icon: <MeetingRoomIcon/>,
-        href: '/',
-        disable: true
-    },
+    // {
+    //     text: 'Blog',
+    //     icon: <ForumIcon/>,
+    //     href: '/',
+    //     disable: true
+    // },
+    // {
+    //     text: 'Rooms',
+    //     icon: <MeetingRoomIcon/>,
+    //     href: '/',
+    //     disable: true
+    // },
     // {
     //     text: 'Riot',
     //     icon: <HomeIcon/>,
