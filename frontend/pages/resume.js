@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Head from 'next/head';
 import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
 import { Document, Page, pdfjs } from 'react-pdf';
 
 import { useResize } from '../utils/hooks/useResize';
@@ -38,6 +39,9 @@ export default function About(props){
             <Head>
                 <title key="title">Jonathan Chai - Resume</title>
             </Head>
+            <Typography variant='h5'>
+                Updated: 09/06/2020
+            </Typography>
             <Document file={"/doc/res.pdf"} className={classes.restyle}>
                 <Page 
                     pageNumber={1} 

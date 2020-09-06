@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { useResize } from '../utils/hooks/useResize';
 
 export default function Canvas(props) {
-    //issue in useResize fix later
     const dimensions = useResize(props.container);
 
     useEffect(()=>{

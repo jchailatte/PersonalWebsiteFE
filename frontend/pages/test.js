@@ -50,37 +50,31 @@ export async function getStaticProps(context){
 
 export default function About(props){
     const classes = useStyles();
-    const [y, setY] = useState(100);
-    const [x, setX] = useState(300);
+    const [y, setY] = useState(350);
+    const [x, setX] = useState(350);
     const dimensions = useResize("container")
 
-    const [canvas, setCanvas] = useState(null);
-    var context = null;
+    let timeout;
 
-    var timeout;
-
-    const brush = new Brush(x,y,'#000000', 30, 5);
+    const brush = new Brush(x,y,'#000000', 50, 5);
     const bs = new Brushstroke({
         duration: 2, 
-        inkAmount: 5, 
-        size: 30,
+        inkAmount: 4, 
+        size: 40,
         color: '#000000',
-        animation: 'points'
+        animation: 'points',
     })
 
     useEffect(()=> {
         window.addEventListener('scroll', handleScroll, false);
+        initialDraw();
+
         brush.startStroke(x,y);
 
         return _ => {
             window.removeEventListener('scroll', handleScroll, false);
         }
     },[]);
-
-    useEffect(()=>{
-        console.log('in');
-//        brush.render(document.getElementById('scroll').getContext('2d'), x, window.scrollY + window.innerHeight*0.5)
-    },[x]);
 
     const handleScroll = () => {
         if(timeout){
@@ -89,21 +83,39 @@ export default function About(props){
 
         timeout = window.requestAnimationFrame(function(){
             console.log(window.scrollY);
-            brush.render(document.getElementById('scroll').getContext('2d'), x, window.scrollY + window.innerHeight*0.5)
-
-            // if(window.scrollY>50 && window.scrollY<1000){
-            //     setX(window.scrollY/5 + 300);
+            let tempx = x;
+            // if(window.scrollY>20 && window.scrollY<200){
+            //     tempx = Math.cbrt(window.scrollY);
             // }
 
-            // else(
-            //     setX(prevState=>prevState)
-            // )
+            brush.render(document.getElementById('scroll').getContext('2d'), tempx, window.scrollY + window.innerHeight*0.5)
+
         })
     }
 
     const initialDraw = () =>{
         bs.draw({
-            points:[0,0]
+            canvas: document.getElementById("scroll"),
+            ctx: document.getElementById("scroll").getContext('2d'),
+            //scale all points using ratio innerWidth/1535
+            points:[
+                350, 350,
+
+                350, 350,
+                350, 150,
+                200, 50,
+                250, 150,
+                
+                100, 100,
+                30, 50,
+                75, 150,
+                175, 225,
+
+                100, 225,
+                200, 325,
+
+                350, 350               
+            ]
         });
     }
 
@@ -118,7 +130,7 @@ export default function About(props){
             <Grid container item spacing={3} xs={12} md={7} className={classes.container} id="container" alignItems="center">
                 <Grid item xs={2}></Grid>
                 <Grid item xs={2}>
-                    Scroll down!👇
+
                 </Grid>
                 <Grid item xs={4}></Grid>
                 <Grid item xs={4}>
