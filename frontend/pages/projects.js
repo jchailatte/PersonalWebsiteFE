@@ -22,7 +22,7 @@ const freelance =
         text: 'Booth Technologies',
         image: '/graphics/boothtech.jpg',
         blurb: "Current freelance project that I'm working on where I'm basically rewriting their entire mobile MVP ;)",
-        note: '',
+        note: 'Link goes to their current product',
         button1: 'Go to',
         button2: '',
         href1: 'https://booth-frontend.herokuapp.com/'
