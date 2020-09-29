@@ -266,7 +266,7 @@ return (
                 <Link href="/">
                     <img src={"graphics/logo.png"} alt='logo' height="40" width="40" className={classes.logo}></img>
                 </Link>
-                <div className={classes.title}>CaeCeus</div>
+                <div className={classes.title}>Ceus</div>
                 <IconButton onClick={open ? handleDrawerClose : handleDrawerOpen} className={classes.iconbutton}>
                     {!open ? <ChevronRightIcon/> : <ChevronLeftIcon/>}
                 </IconButton>
