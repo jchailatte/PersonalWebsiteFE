@@ -31,7 +31,7 @@ export default function Resume(props){
                 <title key="title">Jonathan Chai - Resume</title>
             </Head>
             <Typography variant='h5'>
-                Updated: 09/06/2020
+                Updated: 11/06/2020
             </Typography>
             <NoSSR>
                 <PDFViewer
