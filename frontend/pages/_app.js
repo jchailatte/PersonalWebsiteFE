@@ -45,7 +45,9 @@ export default function App(props) {
                             by={pageProps.by}
                             blur={pageProps.blur}
                         >
-                            <Component {...pageProps}></Component>
+                            <div style={{position: 'relative'}}>
+                                <Component {...pageProps}></Component>
+                            </div>
                         </Sidebar>
                     </Background>
                 </Provider>

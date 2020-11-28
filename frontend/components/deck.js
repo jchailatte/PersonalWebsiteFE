@@ -16,7 +16,7 @@ import Brushstroke from '../components/brushengine/brushstroke';
 const useStyles = makeStyles((theme)=>(
 {
     media:{
-        height:170,
+        objectFit: 'contain'
     },    
     grow:{
         display: 'flex',
@@ -49,6 +49,8 @@ export default function Deck(props){
                 <CardActionArea disabled style={{height:'90%'}}>
                     <CardMedia
                         className={classes.media}
+                        height="170"
+                        component="img"
                         image={item.image}
                         title={item.text}
                     />
@@ -69,8 +71,11 @@ export default function Deck(props){
                     <Button size="small" color="primary" href={item.href1} disabled={item.button1==''}>
                         {item.button1}
                     </Button>
-                    <Button size="small" color="primary" disabled={item.button2==''}>
+                    <Button size="small" color="primary" href={item.href2} disabled={item.button2==''}>
                         {item.button2}
+                    </Button>
+                    <Button size="small" color="primary" href={item.href3} disabled={item.button3==''}>
+                        {item.button3}
                     </Button>
                 </CardActions>
             </Card>

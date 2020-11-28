@@ -1,7 +1,9 @@
 # Dependency directories
 node_modules/
 
-
 # Next js specific files
-
 .next/
+
+# Graphics that take to much space
+public/graphics/riot
+

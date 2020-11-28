@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 
-import Deck from '../components/deck';
+import Deck from '../../components/deck';
 
 const useStyles = makeStyles((theme)=>(
 {
@@ -31,6 +31,18 @@ const freelance =
 
 const items=
 [
+    {
+        text: 'Outdrafted',
+        image: '/graphics/outdrafted.jpg',
+        blurb: "Hackathon project for the Team Liquid Hackathon. Used to predict probability of winning based solely on team compositions using Challenger data.",
+        note: "This was done during the 10.22.1 patch so values are currently inaccurate",
+        button1: 'Demo',
+        button2: 'Devpost',
+        button3: 'GitHub',
+        href1: 'projects/tlhack',
+        href2: 'https://devpost.com/software/outdrafted',
+        href3: 'https://github.com/jchailatte/TLHackathon'
+    },
     {
         text: 'CS@SC Summer Camps',
         image: '/graphics/summercamp.png',

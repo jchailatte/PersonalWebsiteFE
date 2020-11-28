@@ -26,6 +26,7 @@ import HomeIcon from '@material-ui/icons/Home';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import MeetingRoomIcon from '@material-ui/icons/MeetingRoomRounded';
+import SportsEsportsIcon from '@material-ui/icons/SportsEsports';
 
 import { useOpen } from '../utils/hooks/useOpen';
 
@@ -164,6 +165,11 @@ const sbitems =
         icon: <EmailIcon/>,
         href: '/contact',
     },
+    {
+        text: 'Games',
+        icon: <SportsEsportsIcon/>,
+        href: '/games'
+    }
     // {
     //     text: 'Blog',
     //     icon: <ForumIcon/>,
@@ -264,7 +270,7 @@ return (
         <div>
             <div className={classes.toolbar}>
                 <Link href="/">
-                    <img src={"graphics/logo.png"} alt='logo' height="40" width="40" className={classes.logo}></img>
+                    <img src={"/graphics/logo.png"} alt='logo' height="40" width="40" className={classes.logo}></img>
                 </Link>
                 <div className={classes.title}>Ceus</div>
                 <IconButton onClick={open ? handleDrawerClose : handleDrawerOpen} className={classes.iconbutton}>

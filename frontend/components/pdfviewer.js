@@ -30,7 +30,7 @@ export default function PDFViewer ({url, width, pageNumber}){
     );
 }
 
-PDFViewer.PropTypes = {
+PDFViewer.propTypes = {
     url: PropTypes.string.isRequired,
     width: PropTypes.number.isRequired,
     pageNumber: PropTypes.number.isRequired
