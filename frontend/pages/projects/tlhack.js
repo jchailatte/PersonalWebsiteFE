@@ -106,7 +106,7 @@ const useStyles = makeStyles((theme) => ({
         position: 'absolute',
         width: '100%',
         overflow:'hidden',
-        height: '18%',
+        height: '15%',
         background: 'white'
     },
     line1:{
@@ -147,7 +147,7 @@ const useStyles = makeStyles((theme) => ({
         fontFamily: 'SFF'
     },
     wavepadding: {
-        paddingTop: '20vh',
+        paddingTop: '16vh',
     },
     rotatingBlue: {
         animation: '$rotate 6s linear'
@@ -156,8 +156,8 @@ const useStyles = makeStyles((theme) => ({
         transform: 'scaleX(-1)'
     },
     champCards: {
-        height: '47vh',
-        width: '100%%',
+        height: '55vh',
+        width: '7vw',
     },
     gradientBorder: {
         position: 'absolute',
@@ -197,6 +197,9 @@ const useStyles = makeStyles((theme) => ({
         filter: 'alpha(opacity=40)'
     },
     slideDown: {
+    },
+    cardImage: {
+        height: '50vh',
     },
     "@keyframes progress": {
         "0%": {
@@ -403,13 +406,8 @@ export default function Index(props){
 
     const fightOnClick = () => {
         let flag = false;
-        Object.keys(team1).map((index)=>{
-            if(team1[index].champion === "") {
-                flag = true;
-            }
-        });
-        Object.keys(team2).map((index)=>{
-            if(team2[index].champion === "") {
+        Object.keys(team).map((index)=>{
+            if(team[index].champion === "") {
                 flag = true;
             }
         });
@@ -547,14 +545,6 @@ export default function Index(props){
                     </Typography>
                 </Fab>
             </Fade>
-
-
-            <div className={classes.center}>
-
-                    {/* <Typography variant="h1" style={{color: 'white'}}>
-                        {percent}
-                    </Typography> */}
-            </div>
             <Grid container align="center">
                 <Grid item xs={12} className={classes.title}>
                     {[...Array(5)].map((x, i) =>        
@@ -603,7 +593,7 @@ export default function Index(props){
                                     >
                                         <CardHeader title={pos}/>
                                         <CardMedia
-                                            style={{height:'70vh'}}
+                                            className={classes.cardImage}
                                             image={team[pos + '1'].src}
                                         >
                                         </CardMedia>
@@ -629,7 +619,7 @@ export default function Index(props){
                                         >
                                             <CardHeader title={pos} style={{color:"white"}}/>
                                             <CardMedia
-                                                style={{height:'70vh'}}
+                                                className={classes.cardImage}
                                                 image={team[pos + '2'].src}
                                             >
                                             </CardMedia>
