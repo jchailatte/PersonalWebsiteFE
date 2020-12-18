@@ -388,7 +388,7 @@ export default function Index(props){
         const team1string = `${team["Top1"].champion}%2C${team["Jung1"].champion}%2C${team["Mid1"].champion}%2C${team["Bot1"].champion}%2C${team["Sup1"].champion}`;
         const team2string = `${team["Top2"].champion}%2C${team["Jung2"].champion}%2C${team["Mid2"].champion}%2C${team["Bot2"].champion}%2C${team["Sup2"].champion}`;
 
-        fetch(`http://localhost:8088/compare_teams?team_1=${team1string}&team_2=${team2string}`)
+        fetch(`${process.env.TLHACK}/compare_teams?team_1=${team1string}&team_2=${team2string}`)
             .then(data => {
                 return data.json();
             })
