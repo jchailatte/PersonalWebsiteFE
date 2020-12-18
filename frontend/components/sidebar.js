@@ -165,11 +165,11 @@ const sbitems =
         icon: <EmailIcon/>,
         href: '/contact',
     },
-    {
-        text: 'Games',
-        icon: <SportsEsportsIcon/>,
-        href: '/games'
-    }
+    // {
+    //     text: 'Games',
+    //     icon: <SportsEsportsIcon/>,
+    //     href: '/games'
+    // }
     // {
     //     text: 'Blog',
     //     icon: <ForumIcon/>,
